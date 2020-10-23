@@ -136,6 +136,7 @@
             this.createPrizeButton.TabIndex = 5;
             this.createPrizeButton.Text = "Create Prize";
             this.createPrizeButton.UseVisualStyleBackColor = true;
+            this.createPrizeButton.Click += new System.EventHandler(this.createPrizeButton_Click);
             // 
             // orLabel
             // 
@@ -165,7 +166,7 @@
             this.Controls.Add(this.placeNumberLabel);
             this.Controls.Add(this.placeNumberTextBox);
             this.Controls.Add(this.createPrizeHeaderLabel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CreatePrizeForm";
             this.Text = "CreatePrizeForm";
             this.ResumeLayout(false);
