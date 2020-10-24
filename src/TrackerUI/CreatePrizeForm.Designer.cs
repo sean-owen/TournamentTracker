@@ -39,6 +39,7 @@
             this.prizePercentageLabel = new System.Windows.Forms.Label();
             this.createPrizeButton = new System.Windows.Forms.Button();
             this.orLabel = new System.Windows.Forms.Label();
+            this.formSuccessFeedbackLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // createPrizeHeaderLabel
@@ -57,7 +58,7 @@
             this.placeNumberTextBox.Location = new System.Drawing.Point(186, 84);
             this.placeNumberTextBox.Name = "placeNumberTextBox";
             this.placeNumberTextBox.Size = new System.Drawing.Size(192, 23);
-            this.placeNumberTextBox.TabIndex = 4;
+            this.placeNumberTextBox.TabIndex = 1;
             // 
             // placeNumberLabel
             // 
@@ -75,7 +76,7 @@
             this.placeNameTextBox.Location = new System.Drawing.Point(186, 113);
             this.placeNameTextBox.Name = "placeNameTextBox";
             this.placeNameTextBox.Size = new System.Drawing.Size(192, 23);
-            this.placeNameTextBox.TabIndex = 4;
+            this.placeNameTextBox.TabIndex = 2;
             // 
             // placeNameLabel
             // 
@@ -93,7 +94,7 @@
             this.prizeAmountTextBox.Location = new System.Drawing.Point(186, 142);
             this.prizeAmountTextBox.Name = "prizeAmountTextBox";
             this.prizeAmountTextBox.Size = new System.Drawing.Size(192, 23);
-            this.prizeAmountTextBox.TabIndex = 4;
+            this.prizeAmountTextBox.TabIndex = 3;
             // 
             // prizeAmountLabel
             // 
@@ -149,12 +150,22 @@
             this.orLabel.TabIndex = 0;
             this.orLabel.Text = "-OR-";
             // 
+            // formSuccessFeedbackLabel
+            // 
+            this.formSuccessFeedbackLabel.AutoSize = true;
+            this.formSuccessFeedbackLabel.Location = new System.Drawing.Point(72, 413);
+            this.formSuccessFeedbackLabel.Name = "formSuccessFeedbackLabel";
+            this.formSuccessFeedbackLabel.Size = new System.Drawing.Size(221, 15);
+            this.formSuccessFeedbackLabel.TabIndex = 6;
+            this.formSuccessFeedbackLabel.Text = "Click \'Create Prize\' to validate your form.";
+            // 
             // CreatePrizeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(422, 448);
+            this.Controls.Add(this.formSuccessFeedbackLabel);
             this.Controls.Add(this.orLabel);
             this.Controls.Add(this.createPrizeButton);
             this.Controls.Add(this.prizePercentageLabel);
@@ -187,5 +198,6 @@
         private System.Windows.Forms.Label prizePercentageLabel;
         private System.Windows.Forms.Button createPrizeButton;
         private System.Windows.Forms.Label orLabel;
+        private System.Windows.Forms.Label formSuccessFeedbackLabel;
     }
 }

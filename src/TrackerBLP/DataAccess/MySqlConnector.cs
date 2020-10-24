@@ -5,13 +5,17 @@ using TrackerBLP.Models;
 
 namespace TrackerBLP.DataAccess
 {
-    class MySqlConnection : IDataConnection
+    class MySqlConnector : IDataConnection
     {
+        public Prize CreatePerson(Person model)
+        {
+            throw new NotImplementedException();
+        }
+
         // TODO - create method that actually saves to the database
         public Prize CreatePrize(Prize model)
         {
-            model.Id = 1;
-            return model;
+            throw new NotImplementedException();
         }
     }
 }

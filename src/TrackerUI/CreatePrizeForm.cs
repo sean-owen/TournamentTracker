@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using TrackerBLP;
+using TrackerBLP.Models;
 
 namespace TrackerUI
 {
@@ -17,14 +19,83 @@ namespace TrackerUI
 
         private void createPrizeButton_Click(object sender, EventArgs e)
         {
-            this.ValidateForm();
+            if (this.ValidateForm())
+            {
+                formSuccessFeedbackLabel.Text = "Success!";
+                formSuccessFeedbackLabel.ForeColor = Color.Green;
+
+                Prize prizeModel = new Prize(
+                    placeNameTextBox.Text,
+                    placeNumberTextBox.Text,
+                    prizeAmountTextBox.Text,
+                    prizePercentageTextBox.Text);
+               
+                GlobalConfig.Connection.CreatePrize(prizeModel);
+              
+            }
+            else
+            {
+                formSuccessFeedbackLabel.Text = "Error! Please enter valid parameters.";
+                formSuccessFeedbackLabel.ForeColor = Color.Red;
+            }
         }
 
         private bool ValidateForm()
         {
+            bool placeNumberValid = this.ValidatePlaceNumber();
+            bool placeNameValid = this.ValidatePlaceName();
+            bool prizeAmountValid = this.ValidatePrizeAmount();
+            bool prizePercentageValid = this.ValidatePrizePercentage();
+
+            return placeNumberValid && placeNameValid && (prizeAmountValid ^ prizePercentageValid);          
+        }
+
+        private bool ValidatePlaceName()
+        {
             bool output = true;
-            int placeNumber = 0;
-            bool placeNumberValidNumber = int.TryParse(placeNumberTextBox.Text, out placeNumber);
+            if (placeNameTextBox.Text == string.Empty)
+            {
+                output = false;
+            }
+
+            return output;
+        }
+
+        private bool ValidatePrizePercentage()
+        {
+            bool output = true;
+            bool prizePercentageValid = double.TryParse(prizePercentageTextBox.Text, out double prizePercentage);
+            if (prizePercentageValid)
+            {
+                if (prizePercentage < 0 || prizePercentage > 100)
+                {
+                    output = false;
+                }
+            }
+            else 
+            {
+                output = false;
+            }
+
+            return output;
+        }
+
+        private bool ValidatePrizeAmount()
+        {
+            bool output = true;
+            decimal.TryParse(prizeAmountTextBox.Text, out decimal prizeAmount);      
+            if (prizeAmount <= 0)
+            {
+                output = false;
+            }
+
+            return output;
+        }
+
+        private bool ValidatePlaceNumber()
+        {
+            bool output = true;
+            bool placeNumberValidNumber = int.TryParse(placeNumberTextBox.Text, out int placeNumber);
 
             if (!placeNumberValidNumber)
             {
@@ -35,26 +106,6 @@ namespace TrackerUI
                 output = false;
             }
             if (placeNameTextBox.Text.Length < 1)
-            {
-                output = false;
-            }
-
-
-
-            bool prizeAmountValid = decimal.TryParse(prizeAmountTextBox.Text, out decimal prizeAmount);
-            bool prizePercentageValid = int.TryParse(prizeAmountTextBox.Text, out int prizePercentage);
-
-            if (!prizeAmountValid || !prizePercentageValid)
-            {
-                output = false;
-            }
-
-            if (prizeAmount <= 0 && prizePercentage > 0)
-            {
-                output = false;
-            }
-
-            if (prizePercentage < 0 || prizePercentage > 100)
             {
                 output = false;
             }
