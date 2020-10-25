@@ -8,7 +8,7 @@ namespace TrackerBLP.DataAccess
     public interface IDataConnection
     {
         Prize CreatePrize(Prize model);
-        Prize CreatePerson(Person model);
+        Person CreatePerson(Person model);
 
     }
 }

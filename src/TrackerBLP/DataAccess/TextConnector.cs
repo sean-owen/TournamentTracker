@@ -12,10 +12,23 @@ namespace TrackerBLP.DataAccess
         private const string PrizesFile = "PrizeModels.csv";
         private const string PeopleFile = "PersonModels.csv";
 
-        public Prize CreatePerson(Person model)
+        public Person CreatePerson(Person model)
         {
-            // TODO - implement create person!
-            throw new NotImplementedException();
+            // TODO - test create person!
+            List<Person> people = PeopleFile.FullFilePath().LoadFile().ConvertToPeople();
+
+            int newId = 1;
+            if(people.Any())
+            {
+                newId = people.OrderByDescending(x => x.Id).First().Id + 1;
+                model.Id = newId;
+            }
+
+            people.Add(model);
+
+            people.SaveToPeopleFile(PeopleFile);
+
+            return model;
         }
 
         public Prize CreatePrize(Prize model)
@@ -31,7 +44,6 @@ namespace TrackerBLP.DataAccess
                 model.Id = newId;
             }           
             
-
             // add new record with new id
             prizes.Add(model);
 
