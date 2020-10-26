@@ -9,6 +9,8 @@ namespace TrackerBLP.DataAccess
     {
         Prize CreatePrize(Prize model);
         Person CreatePerson(Person model);
+        List<Person> LoadPeople();
+        Team CreateTeam(Team model);
 
     }
 }

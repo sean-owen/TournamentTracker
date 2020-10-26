@@ -67,6 +67,24 @@ namespace TrackerBLP.DataAccess.TextConnectorExtensions
             return people;
         }
 
+        public static List<Team> ConvertToTeams(this List<string> lines)
+        {
+            List<Team> teamList = new List<Team>();
+
+            foreach (string line in lines)
+            {
+                string[] columns = line.Split(',');
+
+                Team team = new Team();
+                // TODO - complete saving to match standard pattern
+                // consider writing generic convert method (?)
+
+                teamList.Add(team);
+            }
+
+            return teamList;
+        }
+
 
         public static void SaveToPrizeFile(this List<Prize> prizes, string fileName)
         {
@@ -87,6 +105,19 @@ namespace TrackerBLP.DataAccess.TextConnectorExtensions
             foreach(Person person in people)
             {
                 lines.Add($"{ person.Id },{ person.FirstName },{ person.LastName },{ person.EmailAddress },{ person.PhoneNumber }");
+            }
+
+            File.WriteAllLines(fileName.FullFilePath(), lines);
+        }
+
+        public static void SaveToTeamsFile(this List<Team> teamList, string fileName)
+        {
+            List<string> lines = new List<string>();
+
+            foreach (Team team in teamList)
+            {
+                // TODO - finish implementing save teams method
+                lines.Add($"{ team.Id },");
             }
 
             File.WriteAllLines(fileName.FullFilePath(), lines);

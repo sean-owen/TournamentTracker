@@ -46,7 +46,7 @@ namespace TrackerUI
             this.lastNameTextBox = new System.Windows.Forms.TextBox();
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.firstNameTextBox = new System.Windows.Forms.TextBox();
-            this.teamMembersListBox = new System.Windows.Forms.ListBox();
+            this.viewTeamMembersListBox = new System.Windows.Forms.ListBox();
             this.deleteTeamMemberButton = new System.Windows.Forms.Button();
             this.createTeamButton = new System.Windows.Forms.Button();
             this.addNewMemberGroupBox.SuspendLayout();
@@ -68,7 +68,7 @@ namespace TrackerUI
             this.teamNameTextBox.Location = new System.Drawing.Point(12, 107);
             this.teamNameTextBox.Name = "teamNameTextBox";
             this.teamNameTextBox.Size = new System.Drawing.Size(263, 23);
-            this.teamNameTextBox.TabIndex = 4;
+            this.teamNameTextBox.TabIndex = 1;
             // 
             // teamNameLabel
             // 
@@ -88,7 +88,7 @@ namespace TrackerUI
             this.selectTeamMemberListBox.Location = new System.Drawing.Point(12, 176);
             this.selectTeamMemberListBox.Name = "selectTeamMemberListBox";
             this.selectTeamMemberListBox.Size = new System.Drawing.Size(263, 23);
-            this.selectTeamMemberListBox.TabIndex = 1;
+            this.selectTeamMemberListBox.TabIndex = 2;
             // 
             // selectTeamMemberLabel
             // 
@@ -111,9 +111,10 @@ namespace TrackerUI
             this.addMemberButton.Margin = new System.Windows.Forms.Padding(0);
             this.addMemberButton.Name = "addMemberButton";
             this.addMemberButton.Size = new System.Drawing.Size(155, 44);
-            this.addMemberButton.TabIndex = 5;
+            this.addMemberButton.TabIndex = 3;
             this.addMemberButton.Text = "Add Member";
             this.addMemberButton.UseVisualStyleBackColor = true;
+            this.addMemberButton.Click += new System.EventHandler(this.addMemberButton_Click);
             // 
             // addNewMemberGroupBox
             // 
@@ -146,7 +147,7 @@ namespace TrackerUI
             this.createMemberButton.Margin = new System.Windows.Forms.Padding(0);
             this.createMemberButton.Name = "createMemberButton";
             this.createMemberButton.Size = new System.Drawing.Size(176, 44);
-            this.createMemberButton.TabIndex = 5;
+            this.createMemberButton.TabIndex = 8;
             this.createMemberButton.Text = "Create Member";
             this.createMemberButton.UseVisualStyleBackColor = true;
             this.createMemberButton.Click += new System.EventHandler(this.createMemberButton_Click);
@@ -168,7 +169,7 @@ namespace TrackerUI
             this.mobileTextBox.Location = new System.Drawing.Point(110, 123);
             this.mobileTextBox.Name = "mobileTextBox";
             this.mobileTextBox.Size = new System.Drawing.Size(127, 20);
-            this.mobileTextBox.TabIndex = 4;
+            this.mobileTextBox.TabIndex = 7;
             // 
             // emailLabel
             // 
@@ -187,7 +188,7 @@ namespace TrackerUI
             this.emailTextBox.Location = new System.Drawing.Point(110, 97);
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(127, 20);
-            this.emailTextBox.TabIndex = 4;
+            this.emailTextBox.TabIndex = 6;
             // 
             // lastNameLabel
             // 
@@ -206,7 +207,7 @@ namespace TrackerUI
             this.lastNameTextBox.Location = new System.Drawing.Point(110, 71);
             this.lastNameTextBox.Name = "lastNameTextBox";
             this.lastNameTextBox.Size = new System.Drawing.Size(127, 20);
-            this.lastNameTextBox.TabIndex = 4;
+            this.lastNameTextBox.TabIndex = 5;
             // 
             // firstNameLabel
             // 
@@ -227,15 +228,14 @@ namespace TrackerUI
             this.firstNameTextBox.Size = new System.Drawing.Size(127, 20);
             this.firstNameTextBox.TabIndex = 4;
             // 
-            // teamMembersListBox
+            // viewTeamMembersListBox
             // 
-            this.teamMembersListBox.FormattingEnabled = true;
-            this.teamMembersListBox.ItemHeight = 15;
-            this.teamMembersListBox.Location = new System.Drawing.Point(360, 107);
-            this.teamMembersListBox.Name = "teamMembersListBox";
-            this.teamMembersListBox.Size = new System.Drawing.Size(240, 394);
-            this.teamMembersListBox.TabIndex = 3;
-            this.teamMembersListBox.SelectedIndexChanged += new System.EventHandler(this.matchupListBox_SelectedIndexChanged);
+            this.viewTeamMembersListBox.FormattingEnabled = true;
+            this.viewTeamMembersListBox.ItemHeight = 15;
+            this.viewTeamMembersListBox.Location = new System.Drawing.Point(360, 107);
+            this.viewTeamMembersListBox.Name = "viewTeamMembersListBox";
+            this.viewTeamMembersListBox.Size = new System.Drawing.Size(240, 394);
+            this.viewTeamMembersListBox.TabIndex = 9;
             // 
             // deleteTeamMemberButton
             // 
@@ -246,9 +246,10 @@ namespace TrackerUI
             this.deleteTeamMemberButton.Location = new System.Drawing.Point(606, 300);
             this.deleteTeamMemberButton.Name = "deleteTeamMemberButton";
             this.deleteTeamMemberButton.Size = new System.Drawing.Size(119, 54);
-            this.deleteTeamMemberButton.TabIndex = 5;
+            this.deleteTeamMemberButton.TabIndex = 10;
             this.deleteTeamMemberButton.Text = "Delete Selected";
             this.deleteTeamMemberButton.UseVisualStyleBackColor = true;
+            this.deleteTeamMemberButton.Click += new System.EventHandler(this.deleteTeamMemberButton_Click);
             // 
             // createTeamButton
             // 
@@ -259,9 +260,10 @@ namespace TrackerUI
             this.createTeamButton.Location = new System.Drawing.Point(216, 531);
             this.createTeamButton.Name = "createTeamButton";
             this.createTeamButton.Size = new System.Drawing.Size(240, 89);
-            this.createTeamButton.TabIndex = 5;
+            this.createTeamButton.TabIndex = 11;
             this.createTeamButton.Text = "Create Team";
             this.createTeamButton.UseVisualStyleBackColor = true;
+            this.createTeamButton.Click += new System.EventHandler(this.createTeamButton_Click);
             // 
             // CreateTeamForm
             // 
@@ -271,7 +273,7 @@ namespace TrackerUI
             this.ClientSize = new System.Drawing.Size(750, 650);
             this.Controls.Add(this.createTeamButton);
             this.Controls.Add(this.deleteTeamMemberButton);
-            this.Controls.Add(this.teamMembersListBox);
+            this.Controls.Add(this.viewTeamMembersListBox);
             this.Controls.Add(this.addNewMemberGroupBox);
             this.Controls.Add(this.addMemberButton);
             this.Controls.Add(this.selectTeamMemberLabel);
@@ -279,7 +281,7 @@ namespace TrackerUI
             this.Controls.Add(this.teamNameLabel);
             this.Controls.Add(this.teamNameTextBox);
             this.Controls.Add(this.createTeamHeaderLabel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CreateTeamForm";
             this.Text = "CreateTeamForm";
             this.addNewMemberGroupBox.ResumeLayout(false);
@@ -289,10 +291,7 @@ namespace TrackerUI
 
         }
 
-        private void matchupListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         #endregion
 
@@ -312,7 +311,7 @@ namespace TrackerUI
         private System.Windows.Forms.TextBox emailTextBox;
         private System.Windows.Forms.Label lastNameLabel;
         private System.Windows.Forms.TextBox lastNameTextBox;
-        private System.Windows.Forms.ListBox teamMembersListBox;
+        private System.Windows.Forms.ListBox viewTeamMembersListBox;
         private System.Windows.Forms.Button deleteTeamMemberButton;
         private System.Windows.Forms.Button createTeamButton;
     }

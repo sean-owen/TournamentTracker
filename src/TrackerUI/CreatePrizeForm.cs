@@ -29,9 +29,9 @@ namespace TrackerUI
                     placeNumberTextBox.Text,
                     prizeAmountTextBox.Text,
                     prizePercentageTextBox.Text);
-               
+
                 GlobalConfig.Connection.CreatePrize(prizeModel);
-              
+
             }
             else
             {
@@ -47,7 +47,7 @@ namespace TrackerUI
             bool prizeAmountValid = this.ValidatePrizeAmount();
             bool prizePercentageValid = this.ValidatePrizePercentage();
 
-            return placeNumberValid && placeNameValid && (prizeAmountValid ^ prizePercentageValid);          
+            return placeNumberValid && placeNameValid && (prizeAmountValid ^ prizePercentageValid);
         }
 
         private bool ValidatePlaceName()
@@ -72,7 +72,7 @@ namespace TrackerUI
                     output = false;
                 }
             }
-            else 
+            else
             {
                 output = false;
             }
@@ -83,7 +83,7 @@ namespace TrackerUI
         private bool ValidatePrizeAmount()
         {
             bool output = true;
-            decimal.TryParse(prizeAmountTextBox.Text, out decimal prizeAmount);      
+            decimal.TryParse(prizeAmountTextBox.Text, out decimal prizeAmount);
             if (prizeAmount <= 0)
             {
                 output = false;

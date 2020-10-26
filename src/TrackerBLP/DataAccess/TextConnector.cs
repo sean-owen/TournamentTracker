@@ -11,10 +11,10 @@ namespace TrackerBLP.DataAccess
     {
         private const string PrizesFile = "PrizeModels.csv";
         private const string PeopleFile = "PersonModels.csv";
+        private const string TeamsFile = "TeamModels.csv";
 
         public Person CreatePerson(Person model)
         {
-            // TODO - test create person!
             List<Person> people = PeopleFile.FullFilePath().LoadFile().ConvertToPeople();
 
             int newId = 1;
@@ -52,6 +52,30 @@ namespace TrackerBLP.DataAccess
             prizes.SaveToPrizeFile(PrizesFile);
 
             return model;
+        }
+
+        public Team CreateTeam(Team model)
+        {
+            List<Team> team = TeamsFile.FullFilePath().LoadFile().ConvertToTeams();
+
+            int newId = 1;
+            if (team.Any())
+            {
+                newId = team.OrderByDescending(x => x.Id).First().Id + 1;
+                model.Id = newId;
+            }
+
+            team.Add(model);
+
+            team.SaveToTeamsFile(PeopleFile);
+
+            return model;
+        }
+
+        public List<Person> LoadPeople()
+        {
+            List<Person> people = PeopleFile.FullFilePath().LoadFile().ConvertToPeople();
+            return people;
         }
     }
 }
