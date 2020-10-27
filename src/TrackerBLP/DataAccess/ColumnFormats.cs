@@ -23,5 +23,12 @@ namespace TrackerBLP.DataAccess.TextConnectorExtensions
             EmailAddress = 3,
             PhoneNumber = 4;
         }
+
+        internal struct Team
+        {
+            public const int Id = 0,
+            TeamMembers = 1,
+            TeamName = 2;
+        }
     }
 }
