@@ -13,6 +13,8 @@ namespace TrackerUI
     public partial class CreateTournamentForm : Form
     {
         List<Team> existingTeams = new List<Team>();
+        
+        // TODO - Test wiring up of this form.
         public CreateTournamentForm()
         {
             InitializeComponent();
