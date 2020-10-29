@@ -21,8 +21,8 @@ namespace TrackerBLP.DataAccess
             if(people.Any())
             {
                 newId = people.OrderByDescending(x => x.Id).First().Id + 1;
-                model.Id = newId;
             }
+            model.Id = newId;
 
             people.Add(model);
 
@@ -41,9 +41,9 @@ namespace TrackerBLP.DataAccess
             {
                 // find max id and increment it to select the current id
                 newId = prizes.OrderByDescending(x => x.Id).First().Id + 1;
-                model.Id = newId;
             }           
-            
+            model.Id = newId;
+
             // add new record with new id
             prizes.Add(model);
 
@@ -56,14 +56,14 @@ namespace TrackerBLP.DataAccess
 
         public Team CreateTeam(Team model)
         {
-            List<Team> team = TeamsFile.FullFilePath().LoadFile().ConvertToTeams();
+            List<Team> team = TeamsFile.FullFilePath().LoadFile().ConvertToTeams(PeopleFile);
 
             int newId = 1;
             if (team.Any())
             {
                 newId = team.OrderByDescending(x => x.Id).First().Id + 1;
-                model.Id = newId;
             }
+            model.Id = newId;
 
             team.Add(model);
 

@@ -21,6 +21,8 @@ namespace TrackerUI
             TrackerBLP.GlobalConfig.InitializeConnections(textFiles: true);
 
             Application.Run(new CreateTeamForm());
+            //Application.Run(new CreatePrizeForm());
+
 
         }
     }

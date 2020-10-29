@@ -26,5 +26,10 @@ namespace TrackerUI
         {
 
         }
+
+        private void submitScoreButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

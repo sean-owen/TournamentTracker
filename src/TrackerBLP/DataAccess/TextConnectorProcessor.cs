@@ -8,7 +8,7 @@ using TrackerBLP.Models;
 namespace TrackerBLP.DataAccess.TextConnectorExtensions
 {
     public static class TextConnectorProcessor
-    {        
+    {
         public static string FullFilePath(this string fileName)
         {
             //return @$"{GlobalConfig.TextFileOutputFolderPath}\{fileName}";
@@ -50,7 +50,7 @@ namespace TrackerBLP.DataAccess.TextConnectorExtensions
         {
             List<Person> people = new List<Person>();
 
-            foreach(string line in lines)
+            foreach (string line in lines)
             {
                 string[] columns = line.Split(',');
 
@@ -67,18 +67,30 @@ namespace TrackerBLP.DataAccess.TextConnectorExtensions
             return people;
         }
 
-        public static List<Team> ConvertToTeams(this List<string> lines)
+        // TODO - consider writing generic convert method (?)
+        public static List<Team> ConvertToTeams(this List<string> lines, string peopleFileName)
         {
             List<Team> teamList = new List<Team>();
+            List<Person> people = peopleFileName.FullFilePath().LoadFile().ConvertToPeople();
 
             foreach (string line in lines)
             {
                 string[] columns = line.Split(',');
 
                 Team team = new Team();
-                // TODO - complete saving to match standard pattern
-                // consider writing generic convert method (?)
+                team.Id = int.Parse(columns[ColumnFormats.Team.Id]);
+                team.TeamName = columns[ColumnFormats.Team.TeamName];
 
+                string[] personIds = columns[ColumnFormats.Team.TeamMembers].Split('|');
+
+                List<Person> teamMemberList = new List<Person>();
+                foreach (var id in personIds)
+                {
+                    int parsedId = int.Parse(id);
+                    teamMemberList.Add(people.FirstOrDefault(x => x.Id == parsedId));
+                }
+
+                team.TeamMembers = teamMemberList;
                 teamList.Add(team);
             }
 
@@ -102,7 +114,7 @@ namespace TrackerBLP.DataAccess.TextConnectorExtensions
         {
             List<string> lines = new List<string>();
 
-            foreach(Person person in people)
+            foreach (Person person in people)
             {
                 lines.Add($"{ person.Id },{ person.FirstName },{ person.LastName },{ person.EmailAddress },{ person.PhoneNumber }");
             }

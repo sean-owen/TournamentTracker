@@ -51,7 +51,7 @@ namespace TrackerUI
                 person.EmailAddress = emailTextBox.Text;
                 person.PhoneNumber = mobileTextBox.Text;
 
-                GlobalConfig.Connection.CreatePerson(person);
+                person.Id = GlobalConfig.Connection.CreatePerson(person).Id;
                 selectTeamMemberListBox.Items.Add(person);
                 this.existingPeople.Add(person);
             }

@@ -187,6 +187,7 @@
             this.submitScoreButton.TabIndex = 5;
             this.submitScoreButton.Text = "Submit";
             this.submitScoreButton.UseVisualStyleBackColor = true;
+            this.submitScoreButton.Click += new System.EventHandler(this.submitScoreButton_Click);
             // 
             // TournamentViewerForm
             // 
