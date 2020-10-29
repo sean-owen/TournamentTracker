@@ -9,5 +9,9 @@ namespace TrackerBLP.Models
         public int Id { get; set; }
         public List<Person> TeamMembers { get; set; }
         public string TeamName { get; set; }
+        public override string ToString()
+        {
+            return TeamName != string.Empty ? TeamName : "Error! This Teams' name is not set.";
+        }
     }
 }

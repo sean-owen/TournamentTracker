@@ -25,6 +25,7 @@ namespace TrackerUI
             foreach(var person in people)
             {
                 selectTeamMemberListBox.Items.Add(person);
+                existingPeople.Add(person);
             }            
         }        
 

@@ -23,7 +23,22 @@ namespace TrackerBLP.DataAccess
             throw new NotImplementedException();
         }
 
+        public bool DeletePrize(Prize prize)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Person> LoadPeople()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Prize> LoadPrizes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Team> LoadTeams()
         {
             throw new NotImplementedException();
         }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
+[assembly: InternalsVisibleTo("UnitTest.TackerBLP")]
 namespace TrackerBLP.DataAccess.TextConnectorExtensions
 {
     internal struct ColumnFormats
@@ -27,7 +29,7 @@ namespace TrackerBLP.DataAccess.TextConnectorExtensions
         internal struct Team
         {
             public const int Id = 0,
-            TeamMembers = 1,
+            TeamMembersIds = 1,
             TeamName = 2;
         }
     }

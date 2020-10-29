@@ -81,7 +81,7 @@ namespace TrackerBLP.DataAccess.TextConnectorExtensions
                 team.Id = int.Parse(columns[ColumnFormats.Team.Id]);
                 team.TeamName = columns[ColumnFormats.Team.TeamName];
 
-                string[] personIds = columns[ColumnFormats.Team.TeamMembers].Split('|');
+                string[] personIds = columns[ColumnFormats.Team.TeamMembersIds].Split('|');
 
                 List<Person> teamMemberList = new List<Person>();
                 foreach (var id in personIds)
@@ -125,11 +125,17 @@ namespace TrackerBLP.DataAccess.TextConnectorExtensions
         public static void SaveToTeamsFile(this List<Team> teamList, string fileName)
         {
             List<string> lines = new List<string>();
-
+            
             foreach (Team team in teamList)
             {
-                // TODO - finish implementing save teams method
-                lines.Add($"{ team.Id },");
+                StringBuilder personIds = new StringBuilder();
+                foreach (var person in team.TeamMembers)
+                {
+                    personIds.Append($"{person.Id}|");
+                }
+                personIds.Remove((personIds.Length - 1), 1);
+
+                lines.Add($"{ team.Id },{ personIds },{ team.TeamName }");
             }
 
             File.WriteAllLines(fileName.FullFilePath(), lines);

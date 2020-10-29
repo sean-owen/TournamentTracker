@@ -16,7 +16,7 @@ namespace TrackerBLP.Models
 
         public override string ToString()
         {
-            return (FullName != string.Empty) ? FullName : base.ToString();
+            return (FullName != string.Empty) ? FullName : "Error! This persons' full name is not set.";
         }
     }
 }

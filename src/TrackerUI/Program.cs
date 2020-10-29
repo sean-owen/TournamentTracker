@@ -20,7 +20,7 @@ namespace TrackerUI
             //Application.Run(new TournamentDashboardForm());
             TrackerBLP.GlobalConfig.InitializeConnections(textFiles: true);
 
-            Application.Run(new CreateTeamForm());
+            Application.Run(new CreateTournamentForm());
             //Application.Run(new CreatePrizeForm());
 
 

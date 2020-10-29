@@ -72,10 +72,28 @@ namespace TrackerBLP.DataAccess
             return model;
         }
 
+        public bool DeletePrize(Prize prize)
+        {
+            // TODO - implement delete prize
+            throw new NotImplementedException();
+        }
+
         public List<Person> LoadPeople()
         {
             List<Person> people = PeopleFile.FullFilePath().LoadFile().ConvertToPeople();
             return people;
+        }
+
+        public List<Prize> LoadPrizes()
+        {
+            // TODO - implement load prizes
+            throw new NotImplementedException();
+        }
+
+        public List<Team> LoadTeams()
+        {
+            // TODO - implement load teams
+            throw new NotImplementedException();
         }
     }
 }

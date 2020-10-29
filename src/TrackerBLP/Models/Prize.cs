@@ -36,5 +36,11 @@ namespace TrackerBLP.Models
         public string PlaceName { get; set; }
         public decimal PrizeAmount { get; set; }
         public double PrizePercentage { get; set; }
+
+        public override string ToString()
+        {
+            // TODO - overide to string and decide what to show in view prize listbox!
+            return base.ToString();
+        }
     }
 }
