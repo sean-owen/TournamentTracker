@@ -72,6 +72,12 @@ namespace TrackerBLP.DataAccess
             return model;
         }
 
+        public Tournament CreateTournament(Tournament model)
+        {
+            // TODO - implement create tournament
+            throw new NotImplementedException();
+        }
+
         public bool DeletePrize(Prize prize)
         {
             // TODO - implement delete prize
@@ -86,14 +92,14 @@ namespace TrackerBLP.DataAccess
 
         public List<Prize> LoadPrizes()
         {
-            // TODO - implement load prizes
-            throw new NotImplementedException();
+            List<Prize> prizes = PrizesFile.FullFilePath().LoadFile().ConvertToPrizes();
+            return prizes;
         }
 
         public List<Team> LoadTeams()
         {
-            // TODO - implement load teams
-            throw new NotImplementedException();
+            List<Team> teams = TeamsFile.FullFilePath().LoadFile().ConvertToTeams(PeopleFile);
+            return teams;
         }
     }
 }

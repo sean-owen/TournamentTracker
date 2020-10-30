@@ -23,6 +23,11 @@ namespace TrackerBLP.DataAccess
             throw new NotImplementedException();
         }
 
+        public Tournament CreateTournament(Tournament model)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool DeletePrize(Prize prize)
         {
             throw new NotImplementedException();
