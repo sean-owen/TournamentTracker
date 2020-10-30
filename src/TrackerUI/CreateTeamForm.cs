@@ -58,7 +58,7 @@ namespace TrackerUI
             }
             else
             {
-                // TODO - give user feedback about form completion
+                // TODO - functionality - give user feedback about form completion
                 // formSuccessFeedbackLabel.Text = "Error! Please enter valid parameters.";
                 // formSuccessFeedbackLabel.ForeColor = Color.Red;
             }
@@ -83,14 +83,14 @@ namespace TrackerUI
 
         private bool ValidateForm()
         {
-            // TODO - add validation
+            // TODO - backlog - functionality - add validation
 
             return true;
         }
 
         private bool ValidateSubForm()
         {
-            // TODO - add validation
+            // TODO - backlog - functionality - add validation
 
             // Check team member with the same name does not already exist?
 

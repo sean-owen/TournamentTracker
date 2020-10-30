@@ -17,14 +17,12 @@ namespace TrackerBLP
         {
             if (mySql)
             {
-                // TODO
                 MySqlConnector mySqlConnection = new MySqlConnector();
                 Connection = mySqlConnection;
 
             }
             else if (textFiles)
             {
-                // TODO
                 TextConnector textConnection = new TextConnector();
                 Connection = textConnection;
 

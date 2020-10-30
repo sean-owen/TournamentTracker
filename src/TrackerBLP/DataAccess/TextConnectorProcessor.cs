@@ -67,7 +67,7 @@ namespace TrackerBLP.DataAccess.TextConnectorExtensions
             return people;
         }
 
-        // TODO - consider writing generic convert method (?)
+        // TODO - backlog - refactor - consider writing generic convert method (?)
         public static List<Team> ConvertToTeams(this List<string> lines, string peopleFileName)
         {
             List<Team> teamList = new List<Team>();

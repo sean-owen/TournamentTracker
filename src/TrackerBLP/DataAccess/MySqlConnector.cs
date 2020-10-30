@@ -5,7 +5,7 @@ using TrackerBLP.Models;
 
 namespace TrackerBLP.DataAccess
 {
-    // TODO - add mysql / sql lite database
+    // TODO - backlog - functionality - add mysql / sql lite database
     class MySqlConnector : IDataConnection
     {
         public Person CreatePerson(Person model)

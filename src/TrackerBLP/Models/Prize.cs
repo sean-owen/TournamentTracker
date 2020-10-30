@@ -62,8 +62,8 @@ namespace TrackerBLP.Models
         /// <returns>Place name and value for this prize as a string.</returns>
         public override string ToString()
         {
-            // TODO - consider moving validation to a private method to make this method more easily readable
-            if(this.PlaceName == string.Empty)
+            // TODO - backlog - refactor - consider moving validation to a private method to make this method more easily readable
+            if (this.PlaceName == string.Empty)
             {
                 throw new Exception("Error! PlaceName is not set.");
             }

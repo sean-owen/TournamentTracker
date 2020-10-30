@@ -74,14 +74,26 @@ namespace TrackerBLP.DataAccess
 
         public Tournament CreateTournament(Tournament model)
         {
-            // TODO - implement create tournament
+            // TODO - functionality - implement create tournament
+
+            // follow standard pattern used
+            // consider making generic 'create' method? Probably for a future refactor.
+
             throw new NotImplementedException();
         }
 
         public bool DeletePrize(Prize prize)
         {
-            // TODO - implement delete prize
-            throw new NotImplementedException();
+            // TODO - functionality - implement delete prize
+
+            // Load prize file
+            // find prize to be deleted
+            // remove prize
+            // save back updated prize file
+
+            // If prize is not found in loaded prize file, is false returned? Does this make the delete invalid?
+
+            return true;
         }
 
         public List<Person> LoadPeople()
