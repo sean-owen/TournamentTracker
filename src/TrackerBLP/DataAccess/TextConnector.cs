@@ -9,108 +9,126 @@ namespace TrackerBLP.DataAccess
 {
     public class TextConnector : IDataConnection
     {
-        private const string PrizesFile = "PrizeModels.csv";
-        private const string PeopleFile = "PersonModels.csv";
-        private const string TeamsFile = "TeamModels.csv";
-
         public Person CreatePerson(Person model)
         {
-            List<Person> people = PeopleFile.FullFilePath().LoadFile().ConvertToPeople();
+            List<Person> people = GlobalConfig.PeopleFile.FullFilePath().LoadFile().ConvertToPeople();
 
             int newId = 1;
-            if(people.Any())
+            if (people.Any())
             {
                 newId = people.OrderByDescending(x => x.Id).First().Id + 1;
             }
             model.Id = newId;
 
             people.Add(model);
-
-            people.SaveToPeopleFile(PeopleFile);
+            people.SaveToPeopleFile();
 
             return model;
         }
 
         public Prize CreatePrize(Prize model)
         {
-            // Load text file and convert text to list<Prize>            
-            List<Prize> prizes = PrizesFile.FullFilePath().LoadFile().ConvertToPrizes();
+            List<Prize> prizes = GlobalConfig.PrizesFile.FullFilePath().LoadFile().ConvertToPrizes();
 
             int newId = 1;
             if (prizes.Any())
             {
-                // find max id and increment it to select the current id
                 newId = prizes.OrderByDescending(x => x.Id).First().Id + 1;
-            }           
+            }
             model.Id = newId;
 
-            // add new record with new id
             prizes.Add(model);
-
-            // convert prizes to List<string>
-            // save the list<string> to the text file
-            prizes.SaveToPrizeFile(PrizesFile);
+            prizes.SaveToPrizeFile();
 
             return model;
         }
 
         public Team CreateTeam(Team model)
         {
-            List<Team> team = TeamsFile.FullFilePath().LoadFile().ConvertToTeams(PeopleFile);
+            List<Team> teams = GlobalConfig.TeamsFile.FullFilePath().LoadFile().ConvertToTeams();
 
             int newId = 1;
-            if (team.Any())
+            if (teams.Any())
             {
-                newId = team.OrderByDescending(x => x.Id).First().Id + 1;
+                newId = teams.OrderByDescending(x => x.Id).First().Id + 1;
             }
             model.Id = newId;
 
-            team.Add(model);
-
-            team.SaveToTeamsFile(PeopleFile);
+            teams.Add(model);
+            teams.SaveToTeamsFile();
 
             return model;
         }
 
         public Tournament CreateTournament(Tournament model)
         {
-            // TODO - functionality - implement create tournament
+            List<Tournament> tournaments = GlobalConfig.TournamentsFile.FullFilePath().LoadFile().ConvertToTournaments();
 
-            // follow standard pattern used
-            // consider making generic 'create' method? Probably for a future refactor.
+            int newId = 1;
+            if (tournaments.Any())
+            {
+                newId = tournaments.OrderByDescending(x => x.Id).First().Id + 1;
+            }
+            model.Id = newId;
 
-            throw new NotImplementedException();
+            // create rounds here?
+
+            tournaments.Add(model);
+            tournaments.SaveToTournamentsFile();
+
+            return model;
         }
 
+
+        /// <summary>
+        /// Loads prizes file, removes the entry passed in to this method and saves the updated file.        
+        /// </summary>
+        /// <param name="prize">The prize to be removed from the prizes file.</param>
+        /// <returns>True if prize was successfully removed from prizes file, false oftherwise.</returns>
         public bool DeletePrize(Prize prize)
         {
-            // TODO - functionality - implement delete prize
+            List<Prize> loadedPrizes = GlobalConfig.PrizesFile.FullFilePath().LoadFile().ConvertToPrizes();
 
-            // Load prize file
-            // find prize to be deleted
-            // remove prize
-            // save back updated prize file
-
-            // If prize is not found in loaded prize file, is false returned? Does this make the delete invalid?
-
-            return true;
+            var prizeToDelete = loadedPrizes.FirstOrDefault(x => x.Id == prize.Id);
+            if (prizeToDelete != null)
+            {
+                loadedPrizes.Remove(prizeToDelete);
+                loadedPrizes.SaveToPrizeFile();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
+        /// <summary>
+        /// Loads the list of person saved in the people file.
+        /// </summary>
+        /// <returns>List of person retrieved from the people file.</returns>
         public List<Person> LoadPeople()
         {
-            List<Person> people = PeopleFile.FullFilePath().LoadFile().ConvertToPeople();
+            List<Person> people = GlobalConfig.PeopleFile.FullFilePath().LoadFile().ConvertToPeople();
             return people;
         }
 
+        /// <summary>
+        /// Loads the list of prizes saved in the prizes file.
+        /// </summary>
+        /// <returns>List of prize retrieved from the prizes file.</returns>
         public List<Prize> LoadPrizes()
         {
-            List<Prize> prizes = PrizesFile.FullFilePath().LoadFile().ConvertToPrizes();
+            List<Prize> prizes = GlobalConfig.PrizesFile.FullFilePath().LoadFile().ConvertToPrizes();
             return prizes;
         }
 
+        /// <summary>
+        /// Loads the list of team saved in the reams file.
+        /// </summary>
+        /// <returns>List of team retrieved from the teams file.</returns>
         public List<Team> LoadTeams()
         {
-            List<Team> teams = TeamsFile.FullFilePath().LoadFile().ConvertToTeams(PeopleFile);
+            List<Team> teams = GlobalConfig.TeamsFile.FullFilePath().LoadFile().ConvertToTeams();
             return teams;
         }
     }

@@ -80,6 +80,7 @@ namespace TrackerUI
                 }
                 tournament.EnteredTeams = enteredTeams;
 
+
                 var prizes = new List<Prize>();
                 foreach (var item in viewPrizesListBox.Items)
                 {
@@ -87,6 +88,8 @@ namespace TrackerUI
                 }
                 tournament.Prizes = prizes;
 
+
+                TournamentLogic.CreateRounds(tournament);
                 GlobalConfig.Connection.CreateTournament(tournament);
             }
         }

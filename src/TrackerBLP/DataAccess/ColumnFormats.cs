@@ -8,6 +8,8 @@ namespace TrackerBLP.DataAccess.TextConnectorExtensions
 {
     internal struct ColumnFormats
     {
+        public const int modelId = 0;
+
         internal struct Prize
         {
             public const int Id = 0,
@@ -31,6 +33,32 @@ namespace TrackerBLP.DataAccess.TextConnectorExtensions
             public const int Id = 0,
             TeamMembersIds = 1,
             TeamName = 2;
+        }
+
+        internal struct Tournament
+        {
+            public const int Id = 0,
+            TournamentName = 1,
+            EntryFee = 2,
+            EnteredTeams = 3,
+            Prizes = 4,
+            Rounds = 5;
+        }
+
+        internal struct Matchup
+        {
+            public const int Id = 0,
+            Entries = 1,
+            Winner = 2,
+            MatchupRound = 3;
+        }
+
+        internal struct MatchupEntry
+        {
+            public const int Id = 0,
+            TeamCompeting = 1,
+            Score = 2,
+            ParentMatchup = 3;
         }
     }
 }
