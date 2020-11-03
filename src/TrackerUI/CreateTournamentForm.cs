@@ -29,6 +29,7 @@ namespace TrackerUI
 
         private void addTeamButton_Click(object sender, EventArgs e)
         {
+            // TODO - functionality - add check whether selected item is null
             Team selectedItem = (Team)selectTeamListBox.SelectedItem;
 
             selectTeamListBox.Items.Remove(selectTeamListBox.SelectedItem);

@@ -32,6 +32,7 @@ namespace TrackerUI
 
                 GlobalConfig.Connection.CreatePrize(prizeModel);
 
+                // TODO - functionality - clear down text boxes after creating a prize
             }
             else
             {
