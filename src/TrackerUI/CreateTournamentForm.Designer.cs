@@ -47,6 +47,7 @@ namespace TrackerUI
             this.viewPrizesListBox = new System.Windows.Forms.ListBox();
             this.createTournamentButton = new System.Windows.Forms.Button();
             this.deleteTeamButton = new System.Windows.Forms.Button();
+            this.createTournamentValidationLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // CreateTournamentLabel
@@ -165,9 +166,9 @@ namespace TrackerUI
             this.teamsPlayersLabel.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.teamsPlayersLabel.Location = new System.Drawing.Point(326, 71);
             this.teamsPlayersLabel.Name = "teamsPlayersLabel";
-            this.teamsPlayersLabel.Size = new System.Drawing.Size(156, 30);
+            this.teamsPlayersLabel.Size = new System.Drawing.Size(71, 30);
             this.teamsPlayersLabel.TabIndex = 0;
-            this.teamsPlayersLabel.Text = "Teams / Players";
+            this.teamsPlayersLabel.Text = "Teams";
             // 
             // viewTeamsListBox
             // 
@@ -242,12 +243,22 @@ namespace TrackerUI
             this.deleteTeamButton.UseVisualStyleBackColor = true;
             this.deleteTeamButton.Click += new System.EventHandler(this.deleteTeamButton_Click);
             // 
+            // createTournamentValidationLabel
+            // 
+            this.createTournamentValidationLabel.AutoSize = true;
+            this.createTournamentValidationLabel.Location = new System.Drawing.Point(326, 439);
+            this.createTournamentValidationLabel.Name = "createTournamentValidationLabel";
+            this.createTournamentValidationLabel.Size = new System.Drawing.Size(255, 15);
+            this.createTournamentValidationLabel.TabIndex = 6;
+            this.createTournamentValidationLabel.Text = "Click \'Create Tournament\' to validate this form.";
+            // 
             // CreateTournamentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(722, 477);
+            this.Controls.Add(this.createTournamentValidationLabel);
             this.Controls.Add(this.deleteTeamButton);
             this.Controls.Add(this.createTournamentButton);
             this.Controls.Add(this.viewPrizesListBox);
@@ -297,5 +308,6 @@ namespace TrackerUI
         private System.Windows.Forms.ListBox viewPrizesListBox;
         private System.Windows.Forms.Button createTournamentButton;
         private System.Windows.Forms.Button deleteTeamButton;
+        private System.Windows.Forms.Label createTournamentValidationLabel;
     }
 }

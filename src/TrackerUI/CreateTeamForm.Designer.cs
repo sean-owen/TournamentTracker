@@ -37,6 +37,7 @@ namespace TrackerUI
             this.selectTeamMemberLabel = new System.Windows.Forms.Label();
             this.addMemberButton = new System.Windows.Forms.Button();
             this.addNewMemberGroupBox = new System.Windows.Forms.GroupBox();
+            this.createMemberValidationLabel = new System.Windows.Forms.Label();
             this.createMemberButton = new System.Windows.Forms.Button();
             this.mobileNumberLabel = new System.Windows.Forms.Label();
             this.mobileTextBox = new System.Windows.Forms.TextBox();
@@ -49,6 +50,7 @@ namespace TrackerUI
             this.viewTeamMembersListBox = new System.Windows.Forms.ListBox();
             this.deleteTeamMemberButton = new System.Windows.Forms.Button();
             this.createTeamButton = new System.Windows.Forms.Button();
+            this.createTeamValidationLabel = new System.Windows.Forms.Label();
             this.addNewMemberGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,6 +120,7 @@ namespace TrackerUI
             // 
             // addNewMemberGroupBox
             // 
+            this.addNewMemberGroupBox.Controls.Add(this.createMemberValidationLabel);
             this.addNewMemberGroupBox.Controls.Add(this.createMemberButton);
             this.addNewMemberGroupBox.Controls.Add(this.mobileNumberLabel);
             this.addNewMemberGroupBox.Controls.Add(this.mobileTextBox);
@@ -131,11 +134,22 @@ namespace TrackerUI
             this.addNewMemberGroupBox.ForeColor = System.Drawing.Color.DodgerBlue;
             this.addNewMemberGroupBox.Location = new System.Drawing.Point(12, 279);
             this.addNewMemberGroupBox.Name = "addNewMemberGroupBox";
-            this.addNewMemberGroupBox.Size = new System.Drawing.Size(263, 224);
+            this.addNewMemberGroupBox.Size = new System.Drawing.Size(263, 234);
             this.addNewMemberGroupBox.TabIndex = 6;
             this.addNewMemberGroupBox.TabStop = false;
             this.addNewMemberGroupBox.Tag = "Add New Member";
             this.addNewMemberGroupBox.Text = "Add New Member";
+            // 
+            // createMemberValidationLabel
+            // 
+            this.createMemberValidationLabel.AutoSize = true;
+            this.createMemberValidationLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.createMemberValidationLabel.ForeColor = System.Drawing.Color.Black;
+            this.createMemberValidationLabel.Location = new System.Drawing.Point(40, 207);
+            this.createMemberValidationLabel.Name = "createMemberValidationLabel";
+            this.createMemberValidationLabel.Size = new System.Drawing.Size(147, 15);
+            this.createMemberValidationLabel.TabIndex = 9;
+            this.createMemberValidationLabel.Text = "Enter new member details.";
             // 
             // createMemberButton
             // 
@@ -265,12 +279,22 @@ namespace TrackerUI
             this.createTeamButton.UseVisualStyleBackColor = true;
             this.createTeamButton.Click += new System.EventHandler(this.createTeamButton_Click);
             // 
+            // createTeamValidationLabel
+            // 
+            this.createTeamValidationLabel.AutoSize = true;
+            this.createTeamValidationLabel.Location = new System.Drawing.Point(216, 626);
+            this.createTeamValidationLabel.Name = "createTeamValidationLabel";
+            this.createTeamValidationLabel.Size = new System.Drawing.Size(224, 15);
+            this.createTeamValidationLabel.TabIndex = 12;
+            this.createTeamValidationLabel.Text = "Click \'Create Team\' to validate your form.";
+            // 
             // CreateTeamForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(750, 650);
+            this.Controls.Add(this.createTeamValidationLabel);
             this.Controls.Add(this.createTeamButton);
             this.Controls.Add(this.deleteTeamMemberButton);
             this.Controls.Add(this.viewTeamMembersListBox);
@@ -314,5 +338,7 @@ namespace TrackerUI
         private System.Windows.Forms.ListBox viewTeamMembersListBox;
         private System.Windows.Forms.Button deleteTeamMemberButton;
         private System.Windows.Forms.Button createTeamButton;
+        private System.Windows.Forms.Label createMemberValidationLabel;
+        private System.Windows.Forms.Label createTeamValidationLabel;
     }
 }

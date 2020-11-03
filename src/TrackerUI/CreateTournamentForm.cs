@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using TrackerBLP;
 using TrackerBLP.Models;
@@ -69,6 +66,9 @@ namespace TrackerUI
         {
             if (this.ValidateForm())
             {
+                createTournamentValidationLabel.Text = "Success!";
+                createTournamentValidationLabel.ForeColor = Color.Green;
+
                 Tournament tournament = new Tournament();
                 tournament.TournamentName = tournamentNameTextBox.Text;
                 tournament.EntryFee = decimal.Parse(entryFeeTextBox.Text);
@@ -92,12 +92,25 @@ namespace TrackerUI
                 TournamentLogic.CreateRounds(tournament);
                 GlobalConfig.Connection.CreateTournament(tournament);
             }
+            else
+            {
+                createTournamentValidationLabel.Text = "Error! Please enter valid parameters.";
+                createTournamentValidationLabel.ForeColor = Color.Red;
+
+                CommonActions.LabelErrorAnimation(createTournamentValidationLabel);
+            }
         }
 
         private bool ValidateForm()
         {
             // TODO - backlog - functionality - implement validation
-            return true;
+            bool validTournamentName = !string.IsNullOrWhiteSpace(tournamentNameTextBox.Text);
+            // TODO - functionality - add warning if entry fee is 0
+            bool validNumberOfTeams = viewTeamsListBox.Items.Count > 1;
+            bool atLeastOnePrize = viewPrizesListBox.Items.Count > 0;
+            // TODO - functionality - add warning if no prizes
+
+            return validTournamentName && validNumberOfTeams && atLeastOnePrize;
         }
 
         private void InitializeSelectTeamListBox()

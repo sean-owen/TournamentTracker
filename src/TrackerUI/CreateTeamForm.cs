@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using TrackerBLP;
 using TrackerBLP.Models;
@@ -19,25 +16,47 @@ namespace TrackerUI
         public CreateTeamForm()
         {
             InitializeComponent();
+            this.InitializeSelectTeamMemberListBox();
+
+        }
+
+        private void InitializeSelectTeamMemberListBox()
+        {
+            selectTeamMemberListBox.Items.Clear();
+
             // Load people from database
             var people = GlobalConfig.Connection.LoadPeople();
             // Add people to combo box
-            foreach(var person in people)
+            foreach (var person in people)
             {
                 selectTeamMemberListBox.Items.Add(person);
                 existingPeople.Add(person);
-            }            
-        }        
+            }
+        }
 
         private void createTeamButton_Click(object sender, EventArgs e)
         {
             if (this.ValidateForm())
             {
+                createTeamValidationLabel.Text = "Success!";
+                createTeamValidationLabel.ForeColor = Color.Green;
+
                 Team team = new Team();
                 team.TeamName = teamNameTextBox.Text;
                 team.TeamMembers = this.newTeam;
 
                 GlobalConfig.Connection.CreateTeam(team);
+
+                teamNameTextBox.Text = default;
+                viewTeamMembersListBox.Items.Clear();
+                this.InitializeSelectTeamMemberListBox();
+            }
+            else
+            {
+                createTeamValidationLabel.Text = "Error! Please enter valid parameters.";
+                createTeamValidationLabel.ForeColor = Color.Red;
+
+                CommonActions.LabelErrorAnimation(createTeamValidationLabel);
             }
         }
 
@@ -45,8 +64,10 @@ namespace TrackerUI
         {
             if (this.ValidateSubForm())
             {
-                Person person = new Person();
+                createMemberValidationLabel.Text = "Success!";
+                createMemberValidationLabel.ForeColor = Color.Green;
 
+                Person person = new Person();
                 person.FirstName = firstNameTextBox.Text;
                 person.LastName = lastNameTextBox.Text;
                 person.EmailAddress = emailTextBox.Text;
@@ -55,12 +76,16 @@ namespace TrackerUI
                 person.Id = GlobalConfig.Connection.CreatePerson(person).Id;
                 selectTeamMemberListBox.Items.Add(person);
                 this.existingPeople.Add(person);
+
+                firstNameTextBox.Text = default;
+                lastNameTextBox.Text = default;
+                emailTextBox.Text = default;
+                mobileTextBox.Text = default;
             }
             else
             {
-                // TODO - functionality - give user feedback about form completion
-                // formSuccessFeedbackLabel.Text = "Error! Please enter valid parameters.";
-                // formSuccessFeedbackLabel.ForeColor = Color.Red;
+                createMemberValidationLabel.Text = "Error! Please enter valid parameters.";
+                createMemberValidationLabel.ForeColor = Color.Red;
             }
 
         }
@@ -83,18 +108,35 @@ namespace TrackerUI
 
         private bool ValidateForm()
         {
-            // TODO - backlog - functionality - add validation
+            bool validTeamName = !string.IsNullOrWhiteSpace(teamNameTextBox.Text);
+            bool atLeastOneTeamMember = viewTeamMembersListBox.Items.Count > 0;
 
-            return true;
+            // Check if team members are in another team and warn before allowing to create
+
+            return validTeamName && atLeastOneTeamMember;
         }
 
         private bool ValidateSubForm()
         {
-            // TODO - backlog - functionality - add validation
+            bool validFirstName = !string.IsNullOrWhiteSpace(firstNameTextBox.Text);
+            bool validLastName = !string.IsNullOrWhiteSpace(lastNameTextBox.Text);
 
-            // Check team member with the same name does not already exist?
+            bool validEmail = this.ValidateEmail();
+            bool validateMobileNumber = this.ValidateMobileNumber();
 
-            return true;
-        }        
+            return validFirstName && validLastName && validEmail && validateMobileNumber;
+        }
+
+        private bool ValidateMobileNumber()
+        {
+            // TODO - backlog - add more rigorous validation of mobile numbers
+            return !string.IsNullOrWhiteSpace(mobileTextBox.Text);
+        }
+
+        private bool ValidateEmail()
+        {
+            // TODO - backlog - add more rigorous validation of emails
+            return !string.IsNullOrWhiteSpace(emailTextBox.Text);
+        }
     }
 }

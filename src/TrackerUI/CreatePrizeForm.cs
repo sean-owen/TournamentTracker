@@ -37,6 +37,8 @@ namespace TrackerUI
             {
                 formSuccessFeedbackLabel.Text = "Error! Please enter valid parameters.";
                 formSuccessFeedbackLabel.ForeColor = Color.Red;
+                CommonActions.LabelErrorAnimation(formSuccessFeedbackLabel);
+
             }
         }
 

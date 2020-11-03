@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using TrackerBLP;
 using TrackerBLP.DataAccess.TextConnectorExtensions;
 using TrackerBLP.Models;
 using Xunit;
@@ -13,8 +14,11 @@ namespace UnitTest.TackerBLP
         [Fact]
         public void SaveToTeamsFile_Valid()
         {
+            // Arrange
+            GlobalConfig.TeamsFile = Mocks.FileName;
+
             //Act
-            Mocks.TeamList.SaveToTeamsFile(Mocks.FileName);
+            Mocks.TeamList.SaveToTeamsFile();
 
             //Assert
             Assert.True(File.Exists(Mocks.FileName.FullFilePath()));

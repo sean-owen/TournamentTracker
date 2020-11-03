@@ -9,13 +9,13 @@ namespace TrackerBLP
 {
     public static class GlobalConfig
     {
-        public const string TextFileOutputFolderPath = @"C:\TournamentTracker";
-        public const string PrizesFile = "PrizeModels.csv";
-        public const string PeopleFile = "PersonModels.csv";
-        public const string TeamsFile = "TeamModels.csv";
-        public const string TournamentsFile = "TournamentModels.csv";
-        public const string MatchupsFile = "MatchupModels.csv";
-        public const string MatchupEntriesFile = "MatchupEntryModels.csv";
+        public static string TextFileOutputFolderPath = @"C:\TournamentTracker";
+        public static string PrizesFile = "PrizeModels.csv";
+        public static string PeopleFile = "PersonModels.csv";
+        public static string TeamsFile = "TeamModels.csv";
+        public static string TournamentsFile = "TournamentModels.csv";
+        public static string MatchupsFile = "MatchupModels.csv";
+        public static string MatchupEntriesFile = "MatchupEntryModels.csv";
 
         public static IDataConnection Connection { get; set; }
 

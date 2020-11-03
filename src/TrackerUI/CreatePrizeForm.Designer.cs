@@ -177,6 +177,7 @@
             this.Controls.Add(this.placeNumberLabel);
             this.Controls.Add(this.placeNumberTextBox);
             this.Controls.Add(this.createPrizeHeaderLabel);
+            this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CreatePrizeForm";
             this.Text = "CreatePrizeForm";
