@@ -272,40 +272,65 @@ namespace TrackerBLP.DataAccess.TextConnectorExtensions
 
             foreach (Tournament tournament in tournamentList)
             {
-                StringBuilder enteredTeams = new StringBuilder();
-                foreach (Team team in tournament.EnteredTeams)
-                {
-                    enteredTeams.Append($"{team.Id}|");
-                }
-                enteredTeams.Remove((enteredTeams.Length - 1), 1);
+                string enteredTeams = SaveTournamentEntries(tournament);
+                string prizes = SaveTournamentPrizes(tournament);
+                string rounds = SaveTournamentRounds(tournament);
 
-
-                StringBuilder prizesSb = new StringBuilder();
-                foreach (Prize prize in tournament.Prizes)
-                {
-                    prizesSb.Append($"{prize.Id}|");
-                }
-                prizesSb.Remove((prizesSb.Length - 1), 1);
-
-
-                StringBuilder roundsSb = new StringBuilder();
-                foreach (List<Matchup> round in tournament.Rounds)
-                {
-                    StringBuilder matchupsSb = new StringBuilder();
-                    foreach (Matchup matchup in round)
-                    {
-                        matchupsSb.Append($"{matchup.Id}||");
-                    }
-                    matchupsSb.Remove((matchupsSb.Length - 2), 2);
-
-                    roundsSb.Append($"{matchupsSb}|");
-                }
-                roundsSb.Remove((roundsSb.Length - 1), 1);
-
-                lines.Add($"{ tournament.Id },{ tournament.TournamentName },{ tournament.EntryFee},{ enteredTeams },{ prizesSb },{ roundsSb }");
+                lines.Add($"{ tournament.Id },{ tournament.TournamentName },{ tournament.EntryFee},{ enteredTeams },{ prizes },{ rounds }");
             }
 
             File.WriteAllLines(GlobalConfig.TournamentsFile.FullFilePath(), lines);
         }
+
+        private static string SaveTournamentRounds(Tournament tournament)
+        {
+            StringBuilder roundsSb = new StringBuilder();
+            foreach (List<Matchup> round in tournament.Rounds)
+            {
+                StringBuilder matchupsSb = new StringBuilder();
+                foreach (Matchup matchup in round)
+                {
+                    foreach (var entry in matchup.Entries)
+                    {
+                        // TODO - functionality - 
+                        // save matchup entry and get id
+                        // add it to SBuilder
+                    }
+                    // TODO - functionality - save matchup and get ID
+                    matchupsSb.Append($"{matchup.Id}||");
+                }
+                matchupsSb.Remove((matchupsSb.Length - 2), 2);
+
+                roundsSb.Append($"{matchupsSb}|");
+            }
+            roundsSb.Remove((roundsSb.Length - 1), 1);
+
+            return roundsSb.ToString();
+        }
+
+        private static string SaveTournamentPrizes(Tournament tournament)
+        {
+            StringBuilder prizesSb = new StringBuilder();
+            foreach (Prize prize in tournament.Prizes)
+            {
+                prizesSb.Append($"{prize.Id}|");
+            }
+            prizesSb.Remove((prizesSb.Length - 1), 1);
+
+            return prizesSb.ToString();
+        }
+
+        private static string SaveTournamentEntries(Tournament tournament)
+        {
+            StringBuilder enteredTeams = new StringBuilder();
+            foreach (Team team in tournament.EnteredTeams)
+            {
+                enteredTeams.Append($"{team.Id}|");
+            }
+            enteredTeams.Remove((enteredTeams.Length - 1), 1);
+
+            return enteredTeams.ToString();
+        }
+
     }    
 }
