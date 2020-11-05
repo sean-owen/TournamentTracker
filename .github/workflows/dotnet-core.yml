@@ -22,7 +22,7 @@ jobs:
       run: pwd; echo "printed working directory"; ls -lart; echo "end of debug step";
     
     - name: Install dependencies      
-      run: pwd; echo "printed working directory"; dotnet restore ./src/TrackerBLP/TrackerBLP.csproj; dotnet restore UnitTest.TackerBLP.csproj;
+      run: pwd; echo "printed working directory"; dotnet restore ./src/TrackerBLP/TrackerBLP.csproj; dotnet restore ./src/UnitTest.TackerBLP/UnitTest.TackerBLP.csproj;
     
     - name: Build Tracker
       run: dotnet build ./src/TrackerBLP/TrackerBLP.csproj --configuration Release --no-restore
