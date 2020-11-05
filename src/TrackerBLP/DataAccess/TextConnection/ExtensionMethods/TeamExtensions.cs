@@ -10,7 +10,6 @@ namespace TrackerBLP.DataAccess.TextConnection.ExtensionMethods
 {
     public static class TeamExtensions
     {
-        // TODO - backlog - refactor - consider writing generic convert method (?)
         public static List<Team> ConvertToTeams(this List<string> lines)
         {
             List<Team> teamList = new List<Team>();

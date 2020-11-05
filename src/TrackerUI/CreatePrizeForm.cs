@@ -32,7 +32,11 @@ namespace TrackerUI
 
                 GlobalConfig.Connection.CreatePrize(prizeModel);
 
-                // TODO - functionality - clear down text boxes after creating a prize
+                // clear down text boxes after creating a prize
+                placeNumberTextBox.Text = default;
+                placeNameTextBox.Text = default;
+                prizeAmountTextBox.Text = default;
+                prizePercentageTextBox.Text = default;
             }
             else
             {

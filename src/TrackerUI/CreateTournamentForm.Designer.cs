@@ -77,14 +77,14 @@ namespace TrackerUI
             this.tournamentNameTextBox.Location = new System.Drawing.Point(12, 104);
             this.tournamentNameTextBox.Name = "tournamentNameTextBox";
             this.tournamentNameTextBox.Size = new System.Drawing.Size(263, 23);
-            this.tournamentNameTextBox.TabIndex = 4;
+            this.tournamentNameTextBox.TabIndex = 1;
             // 
             // entryFeeTextBox
             // 
             this.entryFeeTextBox.Location = new System.Drawing.Point(116, 153);
             this.entryFeeTextBox.Name = "entryFeeTextBox";
             this.entryFeeTextBox.Size = new System.Drawing.Size(83, 23);
-            this.entryFeeTextBox.TabIndex = 4;
+            this.entryFeeTextBox.TabIndex = 2;
             this.entryFeeTextBox.Text = "0";
             // 
             // entryFeeLabel
@@ -115,7 +115,7 @@ namespace TrackerUI
             this.createNewTeamLinkLabel.Location = new System.Drawing.Point(203, 213);
             this.createNewTeamLinkLabel.Name = "createNewTeamLinkLabel";
             this.createNewTeamLinkLabel.Size = new System.Drawing.Size(64, 15);
-            this.createNewTeamLinkLabel.TabIndex = 5;
+            this.createNewTeamLinkLabel.TabIndex = 3;
             this.createNewTeamLinkLabel.TabStop = true;
             this.createNewTeamLinkLabel.Text = "create new";
             this.createNewTeamLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.createNewTeamLinkLabel_LinkClicked);
@@ -142,7 +142,7 @@ namespace TrackerUI
             this.selectTeamListBox.Location = new System.Drawing.Point(12, 234);
             this.selectTeamListBox.Name = "selectTeamListBox";
             this.selectTeamListBox.Size = new System.Drawing.Size(255, 23);
-            this.selectTeamListBox.TabIndex = 1;
+            this.selectTeamListBox.TabIndex = 4;
             // 
             // createPrizeButton
             // 
@@ -154,7 +154,7 @@ namespace TrackerUI
             this.createPrizeButton.Margin = new System.Windows.Forms.Padding(0);
             this.createPrizeButton.Name = "createPrizeButton";
             this.createPrizeButton.Size = new System.Drawing.Size(155, 44);
-            this.createPrizeButton.TabIndex = 5;
+            this.createPrizeButton.TabIndex = 6;
             this.createPrizeButton.Text = "Create Prize";
             this.createPrizeButton.UseVisualStyleBackColor = true;
             this.createPrizeButton.Click += new System.EventHandler(this.createPrizeButton_Click);
@@ -177,7 +177,7 @@ namespace TrackerUI
             this.viewTeamsListBox.Location = new System.Drawing.Point(326, 104);
             this.viewTeamsListBox.Name = "viewTeamsListBox";
             this.viewTeamsListBox.Size = new System.Drawing.Size(240, 79);
-            this.viewTeamsListBox.TabIndex = 3;
+            this.viewTeamsListBox.TabIndex = 7;
             this.viewTeamsListBox.SelectedIndexChanged += new System.EventHandler(this.matchupListBox_SelectedIndexChanged);
             // 
             // prizesLabel
@@ -200,7 +200,7 @@ namespace TrackerUI
             this.deletePrizeButton.Location = new System.Drawing.Point(581, 234);
             this.deletePrizeButton.Name = "deletePrizeButton";
             this.deletePrizeButton.Size = new System.Drawing.Size(119, 54);
-            this.deletePrizeButton.TabIndex = 5;
+            this.deletePrizeButton.TabIndex = 10;
             this.deletePrizeButton.Text = "Delete Selected";
             this.deletePrizeButton.UseVisualStyleBackColor = true;
             this.deletePrizeButton.Click += new System.EventHandler(this.deletePrizeButton_Click);
@@ -212,7 +212,7 @@ namespace TrackerUI
             this.viewPrizesListBox.Location = new System.Drawing.Point(326, 234);
             this.viewPrizesListBox.Name = "viewPrizesListBox";
             this.viewPrizesListBox.Size = new System.Drawing.Size(240, 79);
-            this.viewPrizesListBox.TabIndex = 3;
+            this.viewPrizesListBox.TabIndex = 9;
             this.viewPrizesListBox.SelectedIndexChanged += new System.EventHandler(this.matchupListBox_SelectedIndexChanged);
             // 
             // createTournamentButton
@@ -224,7 +224,7 @@ namespace TrackerUI
             this.createTournamentButton.Location = new System.Drawing.Point(326, 347);
             this.createTournamentButton.Name = "createTournamentButton";
             this.createTournamentButton.Size = new System.Drawing.Size(240, 89);
-            this.createTournamentButton.TabIndex = 5;
+            this.createTournamentButton.TabIndex = 11;
             this.createTournamentButton.Text = "Create Tournament";
             this.createTournamentButton.UseVisualStyleBackColor = true;
             this.createTournamentButton.Click += new System.EventHandler(this.createTournamentButton_Click);
@@ -238,7 +238,7 @@ namespace TrackerUI
             this.deleteTeamButton.Location = new System.Drawing.Point(591, 104);
             this.deleteTeamButton.Name = "deleteTeamButton";
             this.deleteTeamButton.Size = new System.Drawing.Size(119, 54);
-            this.deleteTeamButton.TabIndex = 5;
+            this.deleteTeamButton.TabIndex = 8;
             this.deleteTeamButton.Text = "Delete Selected";
             this.deleteTeamButton.UseVisualStyleBackColor = true;
             this.deleteTeamButton.Click += new System.EventHandler(this.deleteTeamButton_Click);

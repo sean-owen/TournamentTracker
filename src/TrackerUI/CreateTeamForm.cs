@@ -92,10 +92,13 @@ namespace TrackerUI
 
         private void addMemberButton_Click(object sender, EventArgs e)
         {
-            viewTeamMembersListBox.Items.Add(selectTeamMemberListBox.SelectedItem);
-            this.newTeam.Add(this.existingPeople.FirstOrDefault(x => x.FullName == selectTeamMemberListBox.SelectedItem.ToString()));
-            this.existingPeople.Remove(this.existingPeople.FirstOrDefault(x => x.FullName == selectTeamMemberListBox.SelectedItem.ToString()));
-            selectTeamMemberListBox.Items.Remove(selectTeamMemberListBox.SelectedItem);
+            if (selectTeamMemberListBox.SelectedItem != null)
+            {
+                viewTeamMembersListBox.Items.Add(selectTeamMemberListBox.SelectedItem);
+                this.newTeam.Add(this.existingPeople.FirstOrDefault(x => x.FullName == selectTeamMemberListBox.SelectedItem.ToString()));
+                this.existingPeople.Remove(this.existingPeople.FirstOrDefault(x => x.FullName == selectTeamMemberListBox.SelectedItem.ToString()));
+                selectTeamMemberListBox.Items.Remove(selectTeamMemberListBox.SelectedItem);
+            }
         }
 
         private void deleteTeamMemberButton_Click(object sender, EventArgs e)

@@ -28,14 +28,18 @@ namespace TrackerUI
 
         private void addTeamButton_Click(object sender, EventArgs e)
         {
-            // TODO - functionality - add check whether selected item is null
-            Team selectedItem = (Team)selectTeamListBox.SelectedItem;
+            if (selectTeamListBox.SelectedItem != null)
+            {
+                Team selectedItem = (Team)selectTeamListBox.SelectedItem;
 
-            selectTeamListBox.Items.Remove(selectTeamListBox.SelectedItem);
-            viewTeamsListBox.Items.Add(selectedItem);
+                selectTeamListBox.Items.Remove(selectTeamListBox.SelectedItem);
+                selectTeamListBox.Text = default;
 
-            viewTeamsList.Add(selectedItem);
-            selectTeamList.Remove(selectedItem);
+                viewTeamsListBox.Items.Add(selectedItem);
+
+                viewTeamsList.Add(selectedItem);
+                selectTeamList.Remove(selectedItem);
+            }
         }
 
         private void createPrizeButton_Click(object sender, EventArgs e)
@@ -91,6 +95,14 @@ namespace TrackerUI
 
                 TournamentLogic.CreateRounds(tournament);
                 GlobalConfig.Connection.CreateTournament(tournament);
+
+                // clear down text boxes after creating
+                tournamentNameTextBox.Text = default;
+                entryFeeTextBox.Text = "0";
+                this.InitializeSelectTeamListBox();
+                viewTeamsListBox.Items.Clear();
+                viewPrizesListBox.SelectedItem = default;
+
             }
             else
             {
@@ -103,7 +115,6 @@ namespace TrackerUI
 
         private bool ValidateForm()
         {
-            // TODO - backlog - functionality - implement validation
             bool validTournamentName = !string.IsNullOrWhiteSpace(tournamentNameTextBox.Text);
             // TODO - functionality - add warning if entry fee is 0
             bool validNumberOfTeams = viewTeamsListBox.Items.Count > 1;
