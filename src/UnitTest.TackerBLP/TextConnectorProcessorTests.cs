@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TrackerBLP;
+using TrackerBLP.DataAccess.TextConnection.ExtensionMethods;
 using TrackerBLP.DataAccess.TextConnectorExtensions;
-using TrackerBLP.Models;
 using Xunit;
 
 namespace UnitTest.TackerBLP

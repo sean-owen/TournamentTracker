@@ -132,5 +132,11 @@ namespace TrackerBLP.DataAccess
             List<Team> teams = GlobalConfig.TeamsFile.FullFilePath().LoadFile().ConvertToTeams();
             return teams;
         }
+
+        public List<Tournament> LoadTournaments()
+        {
+            List<Tournament> tournaments = GlobalConfig.TournamentsFile.FullFilePath().LoadFile().ConvertToTournaments();
+            return tournaments;
+        }
     }
 }

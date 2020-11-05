@@ -129,7 +129,7 @@ namespace TrackerUI
             selectTeamList.Clear();
             selectTeamListBox.Items.Clear();
 
-            var teams = GlobalConfig.Connection.LoadTeams();
+            List<Team> teams = GlobalConfig.Connection.LoadTeams();
             foreach (var team in teams)
             {
                 if (!viewTeamsList.Contains(team))

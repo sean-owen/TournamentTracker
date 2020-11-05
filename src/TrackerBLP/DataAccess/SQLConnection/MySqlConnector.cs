@@ -47,5 +47,10 @@ namespace TrackerBLP.DataAccess
         {
             throw new NotImplementedException();
         }
+
+        public List<Tournament> LoadTournaments()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
