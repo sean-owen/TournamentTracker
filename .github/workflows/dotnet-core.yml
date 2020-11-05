@@ -18,10 +18,10 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Debug workflow
-      run: pwd; ls -lart; echo "end of debug step";
+      run: pwd; echo "printed working directory"; ls -lart; echo "end of debug step";
     - name: Install dependencies      
-      run: dotnet restore ./TournamentTracker.sln
+      run: dotnet restore /src/TournamentTracker.sln
     - name: Build
-      run: dotnet build ./TournamentTracker.sln --configuration Release --no-restore
+      run: pwd; echo "printed working directory"; dotnet build /src/TournamentTracker.sln --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
