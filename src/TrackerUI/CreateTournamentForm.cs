@@ -116,10 +116,10 @@ namespace TrackerUI
         private bool ValidateForm()
         {
             bool validTournamentName = !string.IsNullOrWhiteSpace(tournamentNameTextBox.Text);
-            // TODO - functionality - add warning if entry fee is 0
+            // TODO - backlog - add warning if entry fee is 0 - requires an additional form
             bool validNumberOfTeams = viewTeamsListBox.Items.Count > 1;
             bool atLeastOnePrize = viewPrizesListBox.Items.Count > 0;
-            // TODO - functionality - add warning if no prizes
+            // TODO - backlog - add warning if no prizes - requires an additional form
 
             return validTournamentName && validNumberOfTeams && atLeastOnePrize;
         }
