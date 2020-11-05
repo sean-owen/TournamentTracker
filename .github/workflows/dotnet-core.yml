@@ -1,0 +1,34 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+      
+    - name: Debug workflow
+      run: pwd; echo "printed working directory"; ls -lart; echo "end of debug step";
+    
+    - name: Install dependencies      
+      run: pwd; echo "printed working directory"; dotnet restore ./src/TrackerBLP/TrackerBLP.csproj; dotnet restore ./src/UnitTest.TackerBLP/UnitTest.TackerBLP.csproj;
+    
+    - name: Build Tracker
+      run: dotnet build ./src/TrackerBLP/TrackerBLP.csproj --configuration Release --no-restore
+    
+    - name: Build Test
+      run: dotnet build ./src/UnitTest.TackerBLP/UnitTest.TackerBLP.csproj --configuration Release --no-restore
+    
+    - name: Run Test
+      run: dotnet test ./src/UnitTest.TackerBLP/UnitTest.TackerBLP.csproj --no-restore --verbosity normal
