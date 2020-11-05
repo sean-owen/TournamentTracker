@@ -17,10 +17,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
-    
-    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
       
     - name: Debug workflow
       run: pwd; echo "printed working directory"; ls -lart; echo "end of debug step";
@@ -28,9 +24,11 @@ jobs:
     - name: Install dependencies      
       run: pwd; echo "printed working directory"; dotnet restore ./src/TournamentTracker.sln
     
-    - name: Build
-      #run: dotnet build ./src/TournamentTracker.sln --configuration Release --no-restore
-      run: msbuild ./src/TournamentTracker.sln /t:Restore /p:Configuration=$env:Configuration
+    - name: Build Tracker
+      run: dotnet build ./src/TrackerBLP/TrackerBLP.csproj --configuration Release --no-restore
     
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
+    - name: Build Test
+      run: dotnet build ./src/UnitTest.TackerBLP/UnitTest.TackerBLP.csproj --configuration Release --no-restore
+    
+    - name: Run Test
+      run: dotnet test ./src/UnitTest.TackerBLP/UnitTest.TackerBLP.csproj --no-restore --verbosity normal
