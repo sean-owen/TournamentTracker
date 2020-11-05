@@ -11,7 +11,7 @@ namespace TrackerBLP.Models
         public string TeamName { get; set; }
         public override string ToString()
         {
-            return TeamName != string.Empty ? TeamName : "Error! This Teams' name is not set.";
+            return !string.IsNullOrWhiteSpace(TeamName) ? TeamName : "Error! This Teams' name is not set.";
         }
     }
 }
