@@ -27,12 +27,12 @@ namespace TrackerUI
             {
                 loadExistingTournamentListBox.Items.Add(tournament);
             }
-
         }
 
         private void loadTournamentButton_Click(object sender, EventArgs e)
         {
-            new TournamentViewerForm().ShowDialog();
+            Tournament selectedTourn = (Tournament)loadExistingTournamentListBox.SelectedItem;
+            new TournamentViewerForm(selectedTourn).ShowDialog();
         }
 
         private void createTournamentButton_Click(object sender, EventArgs e)

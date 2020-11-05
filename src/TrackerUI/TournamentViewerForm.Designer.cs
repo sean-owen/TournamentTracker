@@ -85,6 +85,7 @@
             this.roundValuesListBox.Name = "roundValuesListBox";
             this.roundValuesListBox.Size = new System.Drawing.Size(170, 23);
             this.roundValuesListBox.TabIndex = 1;
+            this.roundValuesListBox.SelectedValueChanged += new System.EventHandler(this.roundValuesListBox_SelectedValueChanged);
             // 
             // unplayedFilterCheckBox
             // 
@@ -99,9 +100,11 @@
             // matchupListBox
             // 
             this.matchupListBox.FormattingEnabled = true;
+            this.matchupListBox.HorizontalScrollbar = true;
             this.matchupListBox.ItemHeight = 15;
             this.matchupListBox.Location = new System.Drawing.Point(12, 153);
             this.matchupListBox.Name = "matchupListBox";
+            this.matchupListBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.matchupListBox.Size = new System.Drawing.Size(249, 289);
             this.matchupListBox.TabIndex = 3;
             this.matchupListBox.SelectedIndexChanged += new System.EventHandler(this.matchupListBox_SelectedIndexChanged);
@@ -209,7 +212,7 @@
             this.Controls.Add(this.roundLabel);
             this.Controls.Add(this.headerValue);
             this.Controls.Add(this.headerLabel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "TournamentViewerForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

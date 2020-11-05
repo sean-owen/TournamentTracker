@@ -27,15 +27,16 @@ namespace TrackerBLP
 
             while(round <= numberOfRounds)
             {
-                foreach (var match in previousRound)
+                foreach (Matchup match in previousRound)
                 {
+                    currentMatchup.MatchupRound = round;
                     currentMatchup.Entries.Add(new MatchupEntry()
                     {
-                        ParentMatchup = match
+                        ParentMatchup = match                        
                     });
 
                     if (currentMatchup.Entries.Count > 1)
-                    {
+                    {                        
                         currentRound.Add(currentMatchup);
                         currentMatchup = new Matchup();
                     }
@@ -56,6 +57,7 @@ namespace TrackerBLP
 
             foreach (Team team in teams)
             {
+                current.MatchupRound = 1;
                 current.Entries.Add(new MatchupEntry()
                 {
                     TeamCompeting = team
@@ -64,7 +66,6 @@ namespace TrackerBLP
 
                 if (byes > 0 || current.Entries.Count > 1)
                 {
-                    current.MatchupRound = 1;
                     output.Add(current);
                     current = new Matchup();
 
