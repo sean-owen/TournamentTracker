@@ -17,6 +17,8 @@ namespace UnitTest.TackerBLP
             // Arrange
             GlobalConfig.TeamsFile = Mocks.FileName;
 
+
+
             //Act
             Mocks.TeamList.SaveToTeamsFile();
 

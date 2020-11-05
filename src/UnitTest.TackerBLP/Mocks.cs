@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
+using TrackerBLP;
 using TrackerBLP.Models;
 
 namespace UnitTest.TackerBLP
@@ -10,6 +12,12 @@ namespace UnitTest.TackerBLP
     {
         static Mocks()
         {
+            // ensure file path for text files exists
+            if (!Directory.Exists(GlobalConfig.TextFileOutputFolderPath))
+            {
+                Directory.CreateDirectory(GlobalConfig.TextFileOutputFolderPath);
+            }
+
             FileName = "MockFile.csv";
             Person1 = new Person()
             {
