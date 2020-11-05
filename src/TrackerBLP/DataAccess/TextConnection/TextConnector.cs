@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TrackerBLP.DataAccess.TextConnection.ExtensionMethods;
 using TrackerBLP.DataAccess.TextConnectorExtensions;
 using TrackerBLP.Models;
 

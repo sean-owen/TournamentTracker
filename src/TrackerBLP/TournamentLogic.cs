@@ -10,39 +10,6 @@ namespace TrackerBLP
     {
         public static void CreateRounds(Tournament tournament)
         {
-            // Dummy data
-            //tournament.Rounds = new List<List<Matchup>>()
-            //{
-            //    new List<Matchup>()
-            //    {
-            //        new Matchup()
-            //        {
-            //            Id = 1
-            //        },
-            //        new Matchup()
-            //        {
-            //            Id = 2
-            //        }
-            //    },
-            //    new List<Matchup>()
-            //    {
-            //        new Matchup()
-            //        {
-            //            Id = 3
-            //        },
-            //        new Matchup()
-            //        {
-            //            Id = 4
-            //        }
-            //    }
-            //};
-
-            // TODO - functionality - implement create rounds & subsequently required methods
-            // 1 - calculate number of rounds based on teams           
-            // add round model to make life easier? -----------------
-            // 2 - create matchup list for each round
-            // 3 - add matchup entries for first round only (randomly select pairings and 'byes')
-
             List<Team> randomizedTeams = RandomizeTeamOrder(tournament.EnteredTeams);
             int numberOfRounds = CalculateNumRounds(randomizedTeams.Count);
             int numberOfByes = CalculateNumByes(numberOfRounds, randomizedTeams.Count);

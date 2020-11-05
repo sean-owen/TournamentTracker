@@ -12,7 +12,6 @@ namespace TrackerUI
         List<Team> selectTeamList = new List<Team>();
         List<Team> viewTeamsList = new List<Team>();
 
-        // TODO - functionality - Test wiring up of this form.
         public CreateTournamentForm()
         {
             InitializeComponent();
