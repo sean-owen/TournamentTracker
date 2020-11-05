@@ -20,8 +20,8 @@ jobs:
     - name: Debug workflow
       run: pwd; echo "printed working directory"; ls -lart; echo "end of debug step";
     - name: Install dependencies      
-      run: dotnet restore /src/TournamentTracker.sln
+      run: pwd; echo "printed working directory"; dotnet restore ./src/TournamentTracker.sln
     - name: Build
-      run: pwd; echo "printed working directory"; dotnet build /src/TournamentTracker.sln --configuration Release --no-restore
+      run: dotnet build ./src/TournamentTracker.sln --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
