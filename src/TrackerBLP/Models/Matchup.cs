@@ -20,7 +20,7 @@ namespace TrackerBLP.Models
                     string teamName = entry.TeamCompeting?.TeamName ?? "Error! Team name missing.";
                     sb.Append($"{teamName} vs");
                 }
-                sb.Remove((sb.Length - 1), 1);
+                sb.Remove((sb.Length - 2), 2);
             }
 
             string matchupDetails = sb.ToString();

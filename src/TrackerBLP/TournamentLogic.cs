@@ -97,18 +97,18 @@ namespace TrackerBLP
 
         private static int CalculateNumRounds(int numberOfEnteredTeams)
         {
-            var rounds = numberOfEnteredTeams / 2;
-            var leftOverTeams = numberOfEnteredTeams % 2;
+            int numRounds = 1;
+            int reqNumTeams = 2;
 
-            if (leftOverTeams != 0)
+            while (reqNumTeams < numberOfEnteredTeams)
             {
-                rounds++;
+                numRounds += 1;
+
+                reqNumTeams *= 2;
             }
 
-            return rounds;
-        }
-
-      
+            return numRounds;
+        }      
 
         private static List<Team> RandomizeTeamOrder(List<Team> teams)
         {

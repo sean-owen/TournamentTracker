@@ -23,6 +23,8 @@ namespace TrackerUI
         private void createNewTeamLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             new CreateTeamForm().ShowDialog();
+            // TODO - backlog - should form actually remember what teams have been added rather than resetting?
+            this.viewTeamsList = new List<Team>();
             this.InitializeSelectTeamListBox();
         }
 
@@ -92,7 +94,7 @@ namespace TrackerUI
                 }
                 tournament.Prizes = prizes;
 
-
+                // TODO - functionality - make async to stop UI lagging? use event to update validation text when complete
                 TournamentLogic.CreateRounds(tournament);
                 GlobalConfig.Connection.CreateTournament(tournament);
 
