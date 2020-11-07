@@ -25,9 +25,6 @@ namespace TrackerBLP.Models
 
             string matchupDetails = sb.ToString();
 
-            // TODO - PRIORITY - functionality - investigate why Entries only has 1 MatchupEntry per matchup in round 1
-            // break point on the return and look at tournament after loading
-
             return !string.IsNullOrWhiteSpace(matchupDetails) ? matchupDetails : "Warning! Matchup Entries has an error.";
         }
     }

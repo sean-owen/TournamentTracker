@@ -10,6 +10,11 @@ namespace TrackerBLP.DataAccess.TextConnection.ExtensionMethods
 {
     public static class TournamentExtensions
     {
+        /// <summary>
+        /// Converts a list of string to a list of Tournament.
+        /// </summary>
+        /// <param name="lines">List of strings to be converted to a list of Tournament.</param>
+        /// <returns>List of Tournament.</returns>
         public static List<Tournament> ConvertToTournaments(this List<string> lines)
         {
             List<Tournament> tournamentList = new List<Tournament>();
@@ -66,6 +71,10 @@ namespace TrackerBLP.DataAccess.TextConnection.ExtensionMethods
             return tournamentList;
         }
 
+        /// <summary>
+        /// Saves a list of Tournament to a text file.
+        /// </summary>
+        /// <param name="tournamentList">List of Tournament to be saved to a text file.</param>
         public static void SaveToTournamentsFile(this List<Tournament> tournamentList)
         {
             List<string> lines = new List<string>();

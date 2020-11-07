@@ -9,6 +9,11 @@ namespace TrackerBLP.DataAccess.TextConnection.ExtensionMethods
 {
     public static class PrizeExtensions
     {
+        /// <summary>
+        /// Converts a list of string to a list of Prize.
+        /// </summary>
+        /// <param name="lines">List of strings to be converted to a list of Prize.</param>
+        /// <returns>List of Prize</returns>
         public static List<Prize> ConvertToPrizes(this List<string> lines)
         {
             List<Prize> prizes = new List<Prize>();
@@ -30,6 +35,10 @@ namespace TrackerBLP.DataAccess.TextConnection.ExtensionMethods
             return prizes;
         }
 
+        /// <summary>
+        /// Saves a list of Prize to a text file.
+        /// </summary>
+        /// <param name="prizes">List of Prize to be saved to a text file.</param>
         public static void SaveToPrizeFile(this List<Prize> prizes)
         {
             List<string> lines = new List<string>();

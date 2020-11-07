@@ -9,6 +9,11 @@ namespace TrackerBLP.DataAccess.TextConnection.ExtensionMethods
 {
     public static class MatchupEntryExtensions
     {
+        /// <summary>
+        /// Converts a list of string to a list of MatchupEntry.
+        /// </summary>
+        /// <param name="lines"></param>
+        /// <returns>List of MatchupEntry.</returns>
         public static List<MatchupEntry> ConvertToMatchupEntries(this List<string> lines)
         {
             List<MatchupEntry> loadedMatchupEntries = new List<MatchupEntry>();

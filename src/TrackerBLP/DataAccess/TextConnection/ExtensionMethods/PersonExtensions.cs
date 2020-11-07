@@ -9,6 +9,11 @@ namespace TrackerBLP.DataAccess.TextConnection.ExtensionMethods
 {
     public static class PersonExtensions
     {
+        /// <summary>
+        /// Converts a list of string to a list of Person.
+        /// </summary>
+        /// <param name="lines">List of strings to be converted to a list of Person.</param>
+        /// <returns>List of Person.</returns>
         public static List<Person> ConvertToPeople(this List<string> lines)
         {
             List<Person> people = new List<Person>();
@@ -30,6 +35,10 @@ namespace TrackerBLP.DataAccess.TextConnection.ExtensionMethods
             return people;
         }
 
+        /// <summary>
+        /// Saves a list of Person to a text file.
+        /// </summary>
+        /// <param name="people">List of Person to be saved to a text file.</param>
         public static void SaveToPeopleFile(this List<Person> people)
         {
             List<string> lines = new List<string>();

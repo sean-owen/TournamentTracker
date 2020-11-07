@@ -10,6 +10,11 @@ namespace TrackerBLP.DataAccess.TextConnection.ExtensionMethods
 {
     public static class TeamExtensions
     {
+        /// <summary>
+        /// Converts a list of string to a list of Team.
+        /// </summary>
+        /// <param name="lines">List of strings to be converted to a list of Team.</param>
+        /// <returns>List of Team.</returns>
         public static List<Team> ConvertToTeams(this List<string> lines)
         {
             List<Team> teamList = new List<Team>();
@@ -37,6 +42,10 @@ namespace TrackerBLP.DataAccess.TextConnection.ExtensionMethods
             return teamList;
         }
 
+        /// <summary>
+        /// Saves a list of Team to a text file.
+        /// </summary>
+        /// <param name="teamList">List of Team to be saved to a text file.</param>
         public static void SaveToTeamsFile(this List<Team> teamList)
         {
             List<string> lines = new List<string>();
