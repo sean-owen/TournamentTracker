@@ -12,7 +12,7 @@ namespace TrackerUI
     {
         public EditPersonForm()
         {
-            // TODO - functionality - design, wireup and implement BLP methods required for edit person form
+            // TODO - backlog - design, wireup and implement BLP methods required for edit person form
             InitializeComponent();
         }
 

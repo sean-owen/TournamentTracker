@@ -96,6 +96,7 @@
             this.unplayedFilterCheckBox.TabIndex = 2;
             this.unplayedFilterCheckBox.Text = "Unplayed only";
             this.unplayedFilterCheckBox.UseVisualStyleBackColor = true;
+            this.unplayedFilterCheckBox.CheckedChanged += new System.EventHandler(this.unplayedFilterCheckBox_CheckedChanged);
             // 
             // matchupListBox
             // 

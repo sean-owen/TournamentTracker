@@ -94,7 +94,7 @@ namespace TrackerUI
                 }
                 tournament.Prizes = prizes;
 
-                // TODO - functionality - make async to stop UI lagging? use event to update validation text when complete
+                // TODO - backlog - make async to stop UI lagging? use event to update validation text when complete
                 TournamentLogic.CreateRounds(tournament);
                 GlobalConfig.Connection.CreateTournament(tournament);
 
@@ -121,7 +121,7 @@ namespace TrackerUI
             // TODO - backlog - add warning if entry fee is 0 - requires an additional form
             bool validNumberOfTeams = viewTeamsListBox.Items.Count > 1;
             bool atLeastOnePrize = viewPrizesListBox.Items.Count > 0;
-            // TODO - backlog - add warning if no prizes - requires an additional form
+            // TODO - backlog - add warning if no prizes - requires an additional form? Or MessageBox.Show("Are you sure you want to blah?")
 
             return validTournamentName && validNumberOfTeams && atLeastOnePrize;
         }

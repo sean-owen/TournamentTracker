@@ -13,7 +13,7 @@ using TrackerBLP.Models;
 namespace TrackerUI
 {
     public partial class TournamentViewerForm : Form
-    {
+    {       
         private List<List<Matchup>> loadedMatchups = new List<List<Matchup>>();
         public TournamentViewerForm(Tournament selectedTourn)
         {
@@ -23,24 +23,38 @@ namespace TrackerUI
 
             this.InitializeRoundsListBox(selectedTourn);
             this.InitializeMatchupListBox();
-
         }
 
-        private void InitializeMatchupListBox()
+        private void InitializeMatchupListBox(bool showUnplayedOnly = false)
         {
+
             matchupListBox.Items.Clear();
 
             if (roundValuesListBox.SelectedItem != null)
             {
                 int.TryParse(roundValuesListBox.SelectedItem.ToString(), out int roundToDisplay);
-
+                
                 foreach (List<Matchup> matchups in loadedMatchups)
                 {
                     if (matchups.FirstOrDefault().MatchupRound == roundToDisplay)
                     {
                         foreach (Matchup matchup in matchups)
                         {
-                            matchupListBox.Items.Add(matchup);
+                            if (showUnplayedOnly)
+                            {
+                                if (matchup.Winner == null)
+                                {
+                                    matchupListBox.Items.Add(matchup);
+                                }
+                            }
+                            else
+                            {
+                                if (matchup.Winner != null)
+                                {
+                                    matchup.MatchupDetails += $"-> Winner = {matchup.Winner.TeamName}";
+                                }
+                                matchupListBox.Items.Add(matchup);
+                            }
                         }
                     }
                 }
@@ -76,12 +90,29 @@ namespace TrackerUI
 
         private void submitScoreButton_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("test");
 
+            // TODO - functionality - get submit score button working
+            //Matchup matchupItem = (Matchup)matchupListBox.SelectedItem;
+            //matchupItem.Winner = matchupItem.Entries.First().TeamCompeting;
+            //loadedMatchups.FirstOrDefault().FirstOrDefault(x => x.Id == matchupItem.Id).Winner = matchupItem.Entries.First().TeamCompeting;
         }
 
         private void roundValuesListBox_SelectedValueChanged(object sender, EventArgs e)
         {
             this.InitializeMatchupListBox();
+        }
+
+        private void unplayedFilterCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (unplayedFilterCheckBox.Checked)
+            {
+                InitializeMatchupListBox(showUnplayedOnly: true);
+            }
+            else
+            {
+                InitializeMatchupListBox();
+            }
         }
     }
 }
