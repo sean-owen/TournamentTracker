@@ -10,11 +10,36 @@ namespace TrackerBLP.Models
         {
             MatchupDetails = this.GetMatchupDetails();
         }
+
+        /// <summary>
+        /// The database ID of this matchup.
+        /// </summary>
         public int Id { get; set; }
+
+        /// <summary>
+        /// The teams competing in this matchup.
+        /// </summary>
         public List<MatchupEntry> Entries { get; set; } = new List<MatchupEntry>();
+
+        /// <summary>
+        /// The team that won this matchup.
+        /// </summary>
         public Team Winner { get; set; }
+
+        /// <summary>
+        /// The round this matchup will be played in.
+        /// </summary>
         public int MatchupRound { get; set; }
+
+        /// <summary>
+        /// The teams facing off in this matchup.
+        /// </summary>
         public string MatchupDetails { get; set; }
+
+        /// <summary>
+        /// Returns this instance' MatchupDetails.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             // TODO - functionality - consider this solution, not sure it will work long term...

@@ -19,34 +19,75 @@ namespace TrackerBLP
         {
             double team1Score = matchup.Entries.First().Score;
             double team2Score = matchup.Entries.Last().Score;
-
             matchup.Winner = team1Score > team2Score ? matchup.Entries.First().TeamCompeting : matchup.Entries.Last().TeamCompeting;
 
+            // TODO - backlog - feedback warning to user / log if item was not found in database  
+            // using itemFoundInDatabase
             bool itemFoundInDatabase = GlobalConfig.Connection.UpdateMatchup(matchup);
-            // TODO - backlog - feedback warning to user / log if item was not found in database.
 
-            bool isRoundOver = false;
+            bool isRoundOver = IsRoundOver(tournament, matchup.MatchupRound);
+            bool isTournamentOver = IsTournamentOver(tournament);
+
+            if (isRoundOver && !isTournamentOver)
+            {
+                // TODO - functionality - start next round
+                StartNewRound(tournament, matchup.MatchupRound + 1);
+            }
+
+            return new Tuple<bool, bool>(isRoundOver, isTournamentOver);
+        }
+
+        private static void StartNewRound(Tournament tournament, int roundToStart)
+        {
+            // Get Previous round winners
+            List<Team> previousRoundWinners = new List<Team>();
             foreach (List<Matchup> round in tournament.Rounds)
             {
-                if (round.FirstOrDefault().MatchupRound == matchup.MatchupRound)
+                if (round.FirstOrDefault().MatchupRound == (roundToStart - 1))
                 {
-                    IEnumerable<Matchup> incompleteMatchup = round.Where(x => x.Winner == null);
-                    if (!incompleteMatchup.Any())
+                    foreach (Matchup matchup in round)
                     {
-                        // round complete
-                        isRoundOver = true;
-
-                        // TODO - functionality - Send email / text
-
+                        previousRoundWinners.Add(matchup.Winner);
                     }
                 }
             }
 
-            // TODO - functionality - Check if tournament has finished?
-            bool isTournamentOver = false;
+            // special case if the previous round was the first round
+            // there might be 'byes' to consider
+            if (roundToStart - 1 == 1)
+            {
+                // TODO - functionality - PRIORITY - if previous round was first round you must consider byes
+                // get tournament.Teams - previousRoundWinners to find the byes
+                // add the byes to previousRoundWinners so that the next foreach loop does not throw an exception
+            }
 
+            // populate matchups for 'roundToStart'
+            foreach (List<Matchup> round in tournament.Rounds)
+            {
+                if (round.FirstOrDefault().MatchupRound == roundToStart)
+                {
+                    foreach (Matchup matchup in round)
+                    {
+                        Team firstNewEntry = previousRoundWinners.FirstOrDefault();
+                        previousRoundWinners.Remove(firstNewEntry);
 
-            return new Tuple<bool, bool>(isRoundOver, isTournamentOver);
+                        Team secondNewEntry = previousRoundWinners.FirstOrDefault();
+                        previousRoundWinners.Remove(secondNewEntry);
+
+                        if (firstNewEntry != null && secondNewEntry != null)
+                        {
+                            matchup.Entries.Last().TeamCompeting = secondNewEntry;
+                            matchup.Entries.First().TeamCompeting = firstNewEntry;
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
+                    }
+                }
+            }
+
+            // TODO - functionality - email to confirm new round has started & the matchups that will occur in this round
         }
 
         public static void CreateRounds(Tournament tournament)
@@ -59,6 +100,47 @@ namespace TrackerBLP
             CreateOtherRounds(tournament, numberOfRounds);
         }
 
+        private static bool IsTournamentOver(Tournament tournament)
+        {
+            bool isTournamentOver = true;
+            foreach (List<Matchup> round in tournament.Rounds)
+            {
+                IEnumerable<Matchup> incompleteMatchup = round.Where(x => x.Winner == null);
+                if (incompleteMatchup.Any())
+                {
+                    // round complete
+                    isTournamentOver = false;
+                }
+            }
+
+            if (isTournamentOver)
+            {
+                // TODO - functionality - Send email / text
+            }
+
+            return isTournamentOver;
+        }
+
+        private static bool IsRoundOver(Tournament tournament, int matchupRound)
+        {
+            foreach (List<Matchup> round in tournament.Rounds)
+            {
+                if (round.FirstOrDefault().MatchupRound == matchupRound)
+                {
+                    IEnumerable<Matchup> incompleteMatchup = round.Where(x => x.Winner == null);
+                    if (!incompleteMatchup.Any())
+                    {
+                        // TODO - functionality - Send email / text
+
+                        // round complete
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         private static void CreateOtherRounds(Tournament tournament, int numberOfRounds)
         {
             int round = 2;
@@ -66,18 +148,18 @@ namespace TrackerBLP
             List<Matchup> currentRound = new List<Matchup>();
             Matchup currentMatchup = new Matchup();
 
-            while(round <= numberOfRounds)
+            while (round <= numberOfRounds)
             {
                 foreach (Matchup match in previousRound)
                 {
                     currentMatchup.MatchupRound = round;
                     currentMatchup.Entries.Add(new MatchupEntry()
                     {
-                        ParentMatchup = match                        
+                        ParentMatchup = match
                     });
 
                     if (currentMatchup.Entries.Count > 1)
-                    {                        
+                    {
                         currentRound.Add(currentMatchup);
                         currentMatchup = new Matchup();
                     }
@@ -103,14 +185,14 @@ namespace TrackerBLP
                 {
                     TeamCompeting = team
                 });
-                
+
 
                 if (byes > 0 || current.Entries.Count > 1)
                 {
                     output.Add(current);
                     current = new Matchup();
 
-                    if(byes > 0)
+                    if (byes > 0)
                     {
                         byes--;
                     }
@@ -149,7 +231,7 @@ namespace TrackerBLP
             }
 
             return numRounds;
-        }      
+        }
 
         private static List<Team> RandomizeTeamOrder(List<Team> teams)
         {
