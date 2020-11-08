@@ -57,5 +57,10 @@ namespace TrackerBLP.DataAccess
         {
             throw new NotImplementedException();
         }
+
+        public bool UpdateMatchup(Matchup model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

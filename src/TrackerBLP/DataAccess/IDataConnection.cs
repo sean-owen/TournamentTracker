@@ -9,14 +9,16 @@ namespace TrackerBLP.DataAccess
     {
         Prize CreatePrize(Prize model);
         Person CreatePerson(Person model);
+        Team CreateTeam(Team model);
         List<Person> LoadPeople();
         List<Team> LoadTeams();
         List<Prize> LoadPrizes();
         List<Tournament> LoadTournaments();
         List<List<Matchup>> LoadRounds();
-        Team CreateTeam(Team model);
         Tournament CreateTournament(Tournament model);
-        bool DeletePrize(Prize prize);
+        bool DeletePrize(Prize model);
+        bool UpdateMatchup(Matchup model);
+
 
     }
 }

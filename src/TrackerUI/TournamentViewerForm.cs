@@ -85,17 +85,41 @@ namespace TrackerUI
 
         private void matchupListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (matchupListBox.SelectedItem != null)
+            {
+            var matchupItem = (Matchup)matchupListBox.SelectedItem;
+
+            teamOneLabel.Text = matchupItem.Entries.First().TeamCompeting.TeamName;
+            teamTwoLabel.Text = matchupItem.Entries.Last().TeamCompeting.TeamName;
+            }
+            else
+            {
+                teamOneLabel.Text = "<team one>";
+                teamTwoLabel.Text = "<team two>";
+            }
 
         }
 
         private void submitScoreButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("test");
-
             // TODO - functionality - get submit score button working
-            //Matchup matchupItem = (Matchup)matchupListBox.SelectedItem;
-            //matchupItem.Winner = matchupItem.Entries.First().TeamCompeting;
-            //loadedMatchups.FirstOrDefault().FirstOrDefault(x => x.Id == matchupItem.Id).Winner = matchupItem.Entries.First().TeamCompeting;
+
+            // Validate scores & matchupListBoxSelectedItem
+            if (matchupListBox.SelectedItem != null)
+            {
+                var matchupItem = (Matchup)matchupListBox.SelectedItem;
+                matchupItem.Entries.First().Score = double.Parse(teamOneScoreBox.Text);
+                matchupItem.Entries.Last().Score = double.Parse(teamTwoScoreBox.Text);
+
+                matchupItem.Winner = (matchupItem.Entries.First().Score > matchupItem.Entries.Last().Score) ? matchupItem.Entries.First().TeamCompeting : matchupItem.Entries.Last().TeamCompeting;
+
+                GlobalConfig.Connection.UpdateMatchup(matchupItem);
+            }
+            else
+            {
+                // user feedback
+            }
         }
 
         private void roundValuesListBox_SelectedValueChanged(object sender, EventArgs e)

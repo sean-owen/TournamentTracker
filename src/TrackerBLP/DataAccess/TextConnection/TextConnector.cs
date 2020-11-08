@@ -72,8 +72,6 @@ namespace TrackerBLP.DataAccess
             }
             model.Id = newId;
 
-            // create rounds here?
-
             tournaments.Add(model);
             tournaments.SaveToTournamentsFile();
 
@@ -143,6 +141,12 @@ namespace TrackerBLP.DataAccess
         {
             List<List<Matchup>> rounds = GlobalConfig.TournamentsFile.FullFilePath().LoadFile().ConvertToTournaments().FirstOrDefault().Rounds;
             return rounds;
+        }
+
+        public bool UpdateMatchup(Matchup model)
+        {
+            // TODO - functionality - PRIORITY - implement update matchup
+            throw new NotImplementedException();
         }
     }
 }
