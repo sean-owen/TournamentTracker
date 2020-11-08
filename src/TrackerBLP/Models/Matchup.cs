@@ -37,9 +37,9 @@ namespace TrackerBLP.Models
         public string MatchupDetails { get; set; }
 
         /// <summary>
-        /// Returns this instance' MatchupDetails.
+        /// Returns this instance' MatchupDetails if valid, otherwise an error message.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>MatchupDetails if valid, otherwise an error message.</returns>
         public override string ToString()
         {
             // TODO - functionality - consider this solution, not sure it will work long term...
