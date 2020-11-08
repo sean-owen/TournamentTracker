@@ -13,14 +13,17 @@ using TrackerBLP.Models;
 namespace TrackerUI
 {
     public partial class TournamentViewerForm : Form
-    {       
-        private List<List<Matchup>> loadedMatchups = new List<List<Matchup>>();
+    {
+        private List<List<Matchup>> rounds = new List<List<Matchup>>();
+
+        private Tournament openedTournament = null;
+
         public TournamentViewerForm(Tournament selectedTourn)
         {
             InitializeComponent();
 
-            loadedMatchups = selectedTourn.Rounds;
-
+            this.rounds = selectedTourn.Rounds;
+            this.openedTournament = selectedTourn;
             this.InitializeRoundsListBox(selectedTourn);
             this.InitializeMatchupListBox();
         }
@@ -33,12 +36,12 @@ namespace TrackerUI
             if (roundValuesListBox.SelectedItem != null)
             {
                 int.TryParse(roundValuesListBox.SelectedItem.ToString(), out int roundToDisplay);
-                
-                foreach (List<Matchup> matchups in loadedMatchups)
+
+                foreach (List<Matchup> round in this.rounds)
                 {
-                    if (matchups.FirstOrDefault().MatchupRound == roundToDisplay)
+                    if (round.FirstOrDefault().MatchupRound == roundToDisplay)
                     {
-                        foreach (Matchup matchup in matchups)
+                        foreach (Matchup matchup in round)
                         {
                             if (showUnplayedOnly)
                             {
@@ -74,8 +77,6 @@ namespace TrackerUI
                     roundValuesListBox.Items.Add(round.FirstOrDefault().MatchupRound.ToString());
                 }
             }
-
-            var x = roundValuesListBox.Items;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -87,10 +88,10 @@ namespace TrackerUI
         {
             if (matchupListBox.SelectedItem != null)
             {
-            var matchupItem = (Matchup)matchupListBox.SelectedItem;
+                var matchupItem = (Matchup)matchupListBox.SelectedItem;
 
-            teamOneLabel.Text = matchupItem.Entries.First().TeamCompeting.TeamName;
-            teamTwoLabel.Text = matchupItem.Entries.Last().TeamCompeting.TeamName;
+                teamOneLabel.Text = matchupItem.Entries.First().TeamCompeting.TeamName;
+                teamTwoLabel.Text = matchupItem.Entries.Last().TeamCompeting.TeamName;
             }
             else
             {
@@ -102,24 +103,72 @@ namespace TrackerUI
 
         private void submitScoreButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("test");
-            // TODO - functionality - get submit score button working
-
-            // Validate scores & matchupListBoxSelectedItem
-            if (matchupListBox.SelectedItem != null)
+            if (this.ValidateForm())
             {
-                var matchupItem = (Matchup)matchupListBox.SelectedItem;
+                Matchup matchupItem = (Matchup)matchupListBox.SelectedItem;
                 matchupItem.Entries.First().Score = double.Parse(teamOneScoreBox.Text);
                 matchupItem.Entries.Last().Score = double.Parse(teamTwoScoreBox.Text);
 
-                matchupItem.Winner = (matchupItem.Entries.First().Score > matchupItem.Entries.Last().Score) ? matchupItem.Entries.First().TeamCompeting : matchupItem.Entries.Last().TeamCompeting;
+                this.UpdateTournament(matchupItem);
+                Tuple<bool, bool> statusUpdate = TournamentLogic.ScoreMatchup(this.openedTournament, matchupItem);
+                bool isRoundOver = statusUpdate.Item1;
+                bool isTournamentOver = statusUpdate.Item2;
 
-                GlobalConfig.Connection.UpdateMatchup(matchupItem);
+
+                submitScoreValidationLabel.Text = "Success!";
+                submitScoreValidationLabel.ForeColor = Color.Green;
+
+                if (isTournamentOver)
+                {
+                    Team winner = matchupItem.Entries.First().Score > matchupItem.Entries.Last().Score ? matchupItem.Entries.First().TeamCompeting : matchupItem.Entries.Last().TeamCompeting;
+                    string tournamentOverMessage = $"This tournament is now complete! { winner.TeamName } has won the tournament.";
+                    MessageBox.Show(tournamentOverMessage);
+                    this.Close();
+                }
+                else if (isRoundOver)
+                {
+                    MessageBox.Show("This round is now complete!");
+                }
             }
             else
             {
-                // user feedback
+                submitScoreValidationLabel.Text = "Error! Please enter valid parameters.";
+                submitScoreValidationLabel.ForeColor = Color.Red;
+                CommonActions.LabelErrorAnimation(submitScoreValidationLabel);
             }
+        }
+
+        private void UpdateTournament(Matchup updatedMatchup)
+        {
+            foreach (List<Matchup> round in this.openedTournament.Rounds)
+            {
+                var oldMatchup = round.FirstOrDefault(x => x.Id == updatedMatchup.Id);
+                if (oldMatchup != null)
+                {
+                    round.Remove(oldMatchup);
+                    round.Add(updatedMatchup);
+                }
+            }
+        }
+
+        private bool ValidateForm()
+        {
+            bool validMatchup = matchupListBox.SelectedItem != null;
+            bool validT1Score = double.TryParse(teamOneScoreBox.Text, out _);
+            bool validT2Score = double.TryParse(teamTwoScoreBox.Text, out _);
+
+            bool matchupAlreadyScored = false;
+            if (validMatchup)
+            {
+                var selectedMatchup = (Matchup)matchupListBox.SelectedItem;
+                if (selectedMatchup.Winner != null)
+                {
+                    DialogResult response = MessageBox.Show("This Matchup has already been scored. Are you sure you want to update the scores?", "Warning", MessageBoxButtons.YesNo);
+                    matchupAlreadyScored = response == DialogResult.Yes ? false : true;
+                }
+            }
+
+            return validMatchup && validT1Score && validT2Score && !matchupAlreadyScored;
         }
 
         private void roundValuesListBox_SelectedValueChanged(object sender, EventArgs e)

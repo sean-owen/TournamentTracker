@@ -42,6 +42,7 @@
             this.teamTwoLabel = new System.Windows.Forms.Label();
             this.vsLabel = new System.Windows.Forms.Label();
             this.submitScoreButton = new System.Windows.Forms.Button();
+            this.submitScoreValidationLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // headerLabel
@@ -193,12 +194,22 @@
             this.submitScoreButton.UseVisualStyleBackColor = true;
             this.submitScoreButton.Click += new System.EventHandler(this.submitScoreButton_Click);
             // 
+            // submitScoreValidationLabel
+            // 
+            this.submitScoreValidationLabel.AutoSize = true;
+            this.submitScoreValidationLabel.Location = new System.Drawing.Point(398, 385);
+            this.submitScoreValidationLabel.Name = "submitScoreValidationLabel";
+            this.submitScoreValidationLabel.Size = new System.Drawing.Size(163, 15);
+            this.submitScoreValidationLabel.TabIndex = 6;
+            this.submitScoreValidationLabel.Text = "Click \'Submit\' to enter scores.";
+            // 
             // TournamentViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(693, 450);
+            this.Controls.Add(this.submitScoreValidationLabel);
             this.Controls.Add(this.submitScoreButton);
             this.Controls.Add(this.vsLabel);
             this.Controls.Add(this.teamTwoLabel);
@@ -238,6 +249,7 @@
         private System.Windows.Forms.Label teamTwoLabel;
         private System.Windows.Forms.Label vsLabel;
         private System.Windows.Forms.Button submitScoreButton;
+        private System.Windows.Forms.Label submitScoreValidationLabel;
     }
 }
 

@@ -188,26 +188,5 @@ namespace TrackerBLP.DataAccess.TextConnection.ExtensionMethods
 
             return model;
         }
-
-        private static void SaveToMatchupsFile(this List<Matchup> matchups)
-        {
-            List<string> lines = new List<string>();
-
-            foreach (var entry in matchups)
-            {
-                StringBuilder sb = new StringBuilder();
-                foreach (MatchupEntry matchupEntry in entry.Entries)
-                {
-                    sb.Append($"{ matchupEntry.Id }|");
-                }
-                sb.Remove((sb.Length - 1), 1);
-
-                string winnerId = entry.Winner?.Id.ToString() ?? string.Empty;
-
-                lines.Add($"{ entry.Id },{ sb },{ winnerId },{ entry.MatchupRound }");
-            }
-
-            File.WriteAllLines(GlobalConfig.MatchupsFile.FullFilePath(), lines);
-        }
     }
 }

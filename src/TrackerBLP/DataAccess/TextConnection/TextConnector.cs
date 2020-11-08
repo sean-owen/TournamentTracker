@@ -80,10 +80,10 @@ namespace TrackerBLP.DataAccess
 
 
         /// <summary>
-        /// Loads prizes file, removes the entry passed in to this method and saves the updated file.        
+        /// Loads Prizes file, removes the entry passed in to this method and saves the updated file.        
         /// </summary>
-        /// <param name="prize">The prize to be removed from the prizes file.</param>
-        /// <returns>True if prize was successfully removed from prizes file, false oftherwise.</returns>
+        /// <param name="prize">The Prize to be removed from the Prizes file.</param>
+        /// <returns>True if Prize was successfully removed from Prizes file, false otherwise.</returns>
         public bool DeletePrize(Prize prize)
         {
             List<Prize> loadedPrizes = GlobalConfig.PrizesFile.FullFilePath().LoadFile().ConvertToPrizes();
@@ -102,9 +102,9 @@ namespace TrackerBLP.DataAccess
         }
 
         /// <summary>
-        /// Loads the list of person saved in the people file.
+        /// Loads the list of Person saved in the People file.
         /// </summary>
-        /// <returns>List of person retrieved from the people file.</returns>
+        /// <returns>List of Person retrieved from the People file.</returns>
         public List<Person> LoadPeople()
         {
             List<Person> people = GlobalConfig.PeopleFile.FullFilePath().LoadFile().ConvertToPeople();
@@ -112,9 +112,9 @@ namespace TrackerBLP.DataAccess
         }
 
         /// <summary>
-        /// Loads the list of prizes saved in the prizes file.
+        /// Loads the list of Prize saved in the Prizes file.
         /// </summary>
-        /// <returns>List of prize retrieved from the prizes file.</returns>
+        /// <returns>List of Prize retrieved from the Prizes file.</returns>
         public List<Prize> LoadPrizes()
         {
             List<Prize> prizes = GlobalConfig.PrizesFile.FullFilePath().LoadFile().ConvertToPrizes();
@@ -122,31 +122,58 @@ namespace TrackerBLP.DataAccess
         }
 
         /// <summary>
-        /// Loads the list of team saved in the reams file.
+        /// Loads the list of Team saved in the Teams file.
         /// </summary>
-        /// <returns>List of team retrieved from the teams file.</returns>
+        /// <returns>List of Team retrieved from the Teams file.</returns>
         public List<Team> LoadTeams()
         {
             List<Team> teams = GlobalConfig.TeamsFile.FullFilePath().LoadFile().ConvertToTeams();
             return teams;
         }
 
+        /// <summary>
+        /// Loads the list of Tournament saved in the Tournaments file.
+        /// </summary>
+        /// <returns>List of Tournament retrieved from the Tournaments file.</returns>
         public List<Tournament> LoadTournaments()
         {
             List<Tournament> tournaments = GlobalConfig.TournamentsFile.FullFilePath().LoadFile().ConvertToTournaments();
             return tournaments;
         }
 
+        // TODO - backlog - consider deleted this method? Its not even used?
+        /// <summary>
+        /// Loads the list of rounds (or List<List<Matchup>>) indicated by the Ids saved in the Tournaments file.
+        /// </summary>
+        /// <returns></returns>
         public List<List<Matchup>> LoadRounds()
         {
             List<List<Matchup>> rounds = GlobalConfig.TournamentsFile.FullFilePath().LoadFile().ConvertToTournaments().FirstOrDefault().Rounds;
             return rounds;
         }
 
+        /// <summary>
+        /// Updates the passed in Matchup in the database.
+        /// If the passed in Matchup can be found in the database it is updated, if it cannot be found a new Matchup is saved.
+        /// </summary>
+        /// <param name="model">The Matchup to update in the database.</param>
+        /// <returns>True if the passed Matchup could be found in the database, false if it could not.</returns>
         public bool UpdateMatchup(Matchup model)
         {
-            // TODO - functionality - PRIORITY - implement update matchup
-            throw new NotImplementedException();
+            bool foundInDatabase = false;
+            List<Matchup> matchups = GlobalConfig.MatchupsFile.FullFilePath().LoadFile().ConvertToMatchups();
+
+            var oldMatchup = matchups.FirstOrDefault(x => x.Id == model.Id);
+            if (oldMatchup != null)
+            {
+                foundInDatabase = true;
+                matchups.Remove(oldMatchup);
+            }
+
+            matchups.Add(model);
+            matchups.SaveToMatchupsFile();
+
+            return foundInDatabase;
         }
     }
 }

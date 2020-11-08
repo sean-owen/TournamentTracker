@@ -18,7 +18,5 @@ namespace TrackerBLP.DataAccess
         Tournament CreateTournament(Tournament model);
         bool DeletePrize(Prize model);
         bool UpdateMatchup(Matchup model);
-
-
     }
 }

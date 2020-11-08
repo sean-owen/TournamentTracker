@@ -1,13 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TrackerBLP.Models;
 
 namespace TrackerBLP
 {
     public static class TournamentLogic
     {
+        /// <summary>
+        /// Updates the matchup winner based on the matchup entry with the highest score.
+        /// Checks if the round is complete and if it is, triggers emails to tournament teams to inform them.
+        /// Checks if tournament is completed and if it is, triggers emails to tournament teams to inform them.
+        /// </summary>
+        /// <param name="tournament"></param>
+        /// <param name="matchup"></param>
+        /// <returns>A Tuple<bool, bool> where the first indicates if the round is complete, the second indicates if the tournament is complete.</returns>
+        public static Tuple<bool, bool> ScoreMatchup(Tournament tournament, Matchup matchup)
+        {
+            double team1Score = matchup.Entries.First().Score;
+            double team2Score = matchup.Entries.Last().Score;
+
+            matchup.Winner = team1Score > team2Score ? matchup.Entries.First().TeamCompeting : matchup.Entries.Last().TeamCompeting;
+
+            bool itemFoundInDatabase = GlobalConfig.Connection.UpdateMatchup(matchup);
+            // TODO - backlog - feedback warning to user / log if item was not found in database.
+
+            bool isRoundOver = false;
+            foreach (List<Matchup> round in tournament.Rounds)
+            {
+                if (round.FirstOrDefault().MatchupRound == matchup.MatchupRound)
+                {
+                    IEnumerable<Matchup> incompleteMatchup = round.Where(x => x.Winner == null);
+                    if (!incompleteMatchup.Any())
+                    {
+                        // round complete
+                        isRoundOver = true;
+
+                        // TODO - functionality - Send email / text
+
+                    }
+                }
+            }
+
+            // TODO - functionality - Check if tournament has finished?
+            bool isTournamentOver = false;
+
+
+            return new Tuple<bool, bool>(isRoundOver, isTournamentOver);
+        }
+
         public static void CreateRounds(Tournament tournament)
         {
             List<Team> randomizedTeams = RandomizeTeamOrder(tournament.EnteredTeams);

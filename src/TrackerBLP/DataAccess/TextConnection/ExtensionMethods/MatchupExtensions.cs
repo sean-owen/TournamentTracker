@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using TrackerBLP.DataAccess.TextConnectorExtensions;
@@ -9,6 +10,31 @@ namespace TrackerBLP.DataAccess.TextConnection.ExtensionMethods
 {
     public static class MatchupExtensions
     {
+        /// <summary>
+        /// Saves a list of Matchup to a text file.
+        /// </summary>
+        /// <param name="matchups">List of Matchup to be saved to a text file.</param>
+        public static void SaveToMatchupsFile(this List<Matchup> matchups)
+        {
+            List<string> lines = new List<string>();            
+
+            foreach (var entry in matchups)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (MatchupEntry matchupEntry in entry.Entries)
+                {
+                    sb.Append($"{ matchupEntry.Id }|");
+                }
+                sb.Remove((sb.Length - 1), 1);
+
+                string winnerId = entry.Winner?.Id.ToString() ?? string.Empty;
+
+                lines.Add($"{ entry.Id },{ sb },{ winnerId },{ entry.MatchupRound }");
+            }
+
+            File.WriteAllLines(GlobalConfig.MatchupsFile.FullFilePath(), lines);
+        }
+
         /// <summary>
         /// Converts a list of string to a list of Matchup.
         /// </summary>
