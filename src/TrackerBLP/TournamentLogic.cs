@@ -30,7 +30,6 @@ namespace TrackerBLP
 
             if (isRoundOver && !isTournamentOver)
             {
-                // TODO - functionality - start next round
                 StartNewRound(tournament, matchup.MatchupRound + 1);
             }
 
@@ -50,16 +49,7 @@ namespace TrackerBLP
                         previousRoundWinners.Add(matchup.Winner);
                     }
                 }
-            }
-
-            // special case if the previous round was the first round
-            // there might be 'byes' to consider
-            if (roundToStart - 1 == 1)
-            {
-                // TODO - functionality - PRIORITY - if previous round was first round you must consider byes
-                // get tournament.Teams - previousRoundWinners to find the byes
-                // add the byes to previousRoundWinners so that the next foreach loop does not throw an exception
-            }
+            }            
 
             // populate matchups for 'roundToStart'
             foreach (List<Matchup> round in tournament.Rounds)
@@ -187,15 +177,17 @@ namespace TrackerBLP
                 });
 
 
-                if (byes > 0 || current.Entries.Count > 1)
+                if (byes > 0)
+                {
+                    output.Add(current);
+                    current.Winner = team;
+                    current = new Matchup();
+                    byes--;
+                }
+                else if (current.Entries.Count > 1)
                 {
                     output.Add(current);
                     current = new Matchup();
-
-                    if (byes > 0)
-                    {
-                        byes--;
-                    }
                 }
             }
 

@@ -98,6 +98,7 @@ namespace TrackerUI
                 this.newTeam.Add(this.existingPeople.FirstOrDefault(x => x.FullName == selectTeamMemberListBox.SelectedItem.ToString()));
                 this.existingPeople.Remove(this.existingPeople.FirstOrDefault(x => x.FullName == selectTeamMemberListBox.SelectedItem.ToString()));
                 selectTeamMemberListBox.Items.Remove(selectTeamMemberListBox.SelectedItem);
+                selectTeamMemberListBox.Text = default;
             }
         }
 
